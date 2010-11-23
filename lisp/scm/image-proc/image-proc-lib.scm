@@ -119,7 +119,7 @@
  (send img show)
 
  (define img-file-in "./image/img3.jpg")
- (define img-file-out "./image/img3-2.jpg"
+ (define img-file-out "./image/img3-2.jpg")
  (define img2 (make-image-object (read-bitmap img-file-in)))
  (send img2 show)
  (let loop1 ([i 100])
