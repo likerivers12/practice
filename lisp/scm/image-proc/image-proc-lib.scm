@@ -87,14 +87,14 @@
 
 	   (define/public (show)
 	       (begin
-		(set-image-data bm-dc bm image)
+		(set-image-data! bm-dc bm image)
 		(show-bitmap bm "A")))
 
 	   (define/public (get-bitmap)
 	       bm)
 
 	   (define/public (flush)
-	       (set-image-data bm-dc bm image))
+	       (set-image-data! bm-dc bm image))
 ))
 
 (comment
