@@ -6,6 +6,17 @@
 (define (comment x)
     1)
 
+(define (show-bitmap bm title)
+    (let* ((width (send bm get-width))
+	   (height (send bm get-height))
+	   (frame (new frame% (label title)))
+	   (canvas (new canvas% (parent frame) 
+			(min-width width) (min-height height)
+			(paint-callback 
+			 (lambda (canvas dc) 
+			  (send dc draw-bitmap bm 0 0))))))
+      (send frame show #t)))
+
 (define (read-bitmap df-name)
     (make-object bitmap% df-name))
 
@@ -107,7 +118,9 @@
  (send img set-pixel! 5 10 255)
  (send img show)
 
- (define img2 (make-image-object (read-bitmap "d:/data/image/pic/img3.jpg")))
+ (define img-file-in "./image/img3.jpg")
+ (define img-file-out "./image/img3-2.jpg"
+ (define img2 (make-image-object (read-bitmap img-file-in)))
  (send img2 show)
  (let loop1 ([i 100])
       (or (zero? i)
@@ -119,7 +132,7 @@
  (send img2 set-pixel! 101 100 0)
  (send img2 set-pixel! 101 101 0)
  (send img2 show)
- (save-bitmap (send img2 get-bitmap) "d:/data/image/pic/img3-2.jpg" 'jpeg)
+ (save-bitmap (send img2 get-bitmap) img-file-out 'jpeg)
 )
 )
 
