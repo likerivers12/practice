@@ -1,0 +1,26 @@
+This program is an example of Common Lisp Socket Programming and Thread Programming.
+Programmed by Son,Suil
+You can copy, modify, and redistribute this program.
+
+This program is a kind of communication room.
+A server(comm-server.lisp) program provides a communication bridge among several clients(comm-client.lisp)
+In order to communicate for clients each other, the server should be run at first and clients should conntect to the server.
+Messages from client to client are passed by the server.
+
+1. How to run?
+   run-comm-server
+
+   run-comm-client
+   ...
+   run-comm-client 
+
+2. How to configure ip and port?
+   you should modify the lisp source code.
+
+   (in comm-server.lisp)
+   *server-ip*
+   *server-port*
+
+   (in comm-client.lisp)
+   *remote-ip*
+   *remote-port*
