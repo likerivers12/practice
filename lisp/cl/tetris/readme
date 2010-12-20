@@ -1,0 +1,19 @@
+코드가 정리가 안 되었는데,
+이리저리 찾아보실거 없이 그냥 아무거나 다 질문 올려주세요.
+그래주셔야 저도 저런 쓸데없는 걸 쓴 보람이 있을것 같아요.
+같이 얘기해 봤으면 좋겠어요.
+
+게임 실행을 위해선
+LTk 와 iterate package 가 필요합니다.
+http://www.peter-herth.de/ltk/
+http://common-lisp.net/project/iterate/
+iterate는 loop와 비슷하나 loop보다 더 편리하고 강력하며 무엇보다 더 lispy 한 iteration macro 입니다.
+
+우분투, sbcl에서 실행확인했고 잘 작동합니다.
+뭔가 안된다면 설치가 잘못됩겁니다. 질문주세요.
+
+설치법:
+두개의 파일이 있는데, 두 파일을 한폴더에 몰아넣고
+tetris.asd 파일의 symbolic link를 만들어 ~/.sbcl/systems/ 폴더에 저장하시면 됩니다.
+폴더 위치는 조금 다를 수 있습니다.
+그런후에 (require 'tetris) 하시면 됩니다. SBCL 기준입니다.
