@@ -1,0 +1,222 @@
+% -*- mode:latex; coding: utf-8 -*-
+%%
+%% Thesis 2007 Style
+%% written by You, Hyun Jo
+%%
+%% @PhDThesis{
+%%		author  = {유현조},
+%%		title   = {한국어 복합문의 통사와 의미},
+%%		school  = {서울대학교},
+%%		year    = {2008},
+%%		month   = {August},
+%%		type    = {박사학위논문},
+%%		keyword = {한국어,복합문,어미,다중절문,어미의 통사적 제약},
+%%	}
+%%
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{etex}
+\usepackage{varioref}
+
+%% ================================================================
+%% Generating hyperlinks
+%% ----------------------------------------------------------------
+%
+% should be loaded after varioref package
+%
+\usepackage{ifpdf}
+\ifpdf
+  \usepackage[unicode,pdftex,plainpages=false]{hyperref} %colorlinks
+  \input glyphtounicode\pdfgentounicode=1
+\else
+  %settings for dvipdfmx
+  \usepackage[unicode,dvipdfm,plainpages=false]{hyperref} %colorlinks
+\fi
+\usepackage{url}
+
+\hypersetup{
+bookmarksnumbered=true,
+}
+
+
+
+	
+%% ================================================================
+%% Korean and hangul related settings
+%% ----------------------------------------------------------------
+
+%% kotex packages
+% \usepackage[default]{dhucs-interword}
+\usepackage[hangul,adjustverbatim]{dhucs-setspace}
+\usepackage[gremphhangul=utgt,gremphhanja=utgt]{dhucs-gremph}
+%\usepackage[hang,parenthesis]{dhucsfn}
+% \usepackage{dhucs-trivcj}
+% \usepackage{dhucs-midkor}
+% \usepackage{dhucs-enumitem}
+\usepackage{dhucs-enumerate}
+% \usepackage{dhucs-paralist}
+
+% \usehangulfontspec{ut}
+
+
+
+
+%%
+%% 장절명령
+%%
+\usepackage{titlesec}
+\usepackage[dotinlabels]{titletoc}
+\titlelabel{\thetitle.\enspace}
+%``제 1 절''과 같은 양식을 쓰지 않고 ``1.1.''과 같은 양식을 쓴다.
+\kscntformat{section}{}{}
+
+
+%%
+%% 한글 글꼴 설정
+%%
+
+% rm = utbt 은바탕
+% sf = utgt 은고딕
+% tt = utgt 은고딕
+
+\if@korean
+	\SetHangulFonts{utbt}{utgt}{utgt}
+\fi
+
+%%
+%% 문단 서식
+%%
+
+\setlength\parindent{1pc}% 들여쓰기 1글자
+
+
+
+%% ================================================================
+%% bibliogrphy
+%% ----------------------------------------------------------------
+
+%% Uncomment following lines for natbib
+%% bibliographystyle: chicago, newapa; agsm, kluwer; apalike 
+\usepackage{natbib}
+%\setcitestyle{round,aysep={},notesep={:}} % needs natbib ver. 8
+
+
+%% Uncomment following lines for apacite
+%% Use bibliographystyle: apacite
+%\usepackage[hyper]{apacite}
+
+%% Uncomment following lines for fullname
+%% use bibliographystyle: snuthesis
+%\usepackage{fullname}
+%\let\citeA\namecite
+
+
+%% ================================================================
+%% Ciation
+%% ----------------------------------------------------------------
+
+
+
+%% ================================================================
+%% INDEX
+%% ----------------------------------------------------------------
+\usepackage{makeidx}
+\makeindex
+
+
+
+%% ================================================================
+%% Floats
+%% ----------------------------------------------------------------
+\usepackage[format=hang,margin=11pt]{caption}% \captionof
+
+
+
+%% ================================================================
+%% Macros
+%% ----------------------------------------------------------------
+
+\usepackage{multicol}%
+\usepackage[normalem]{ulem}% \uline{underlined text}
+
+%% verbatim
+\usepackage{fancyvrb}% Verbatim environment
+\usepackage{verbatim}% comment environment
+\usepackage{listings}% lstlisting environment
+
+
+%% tabular
+\usepackage{longtable}%
+\usepackage{array,arydshln}
+\usepackage{booktabs}% \toprule, \midrule, \bottomrule
+\usepackage{slashbox}
+\usepackage{dcolumn}
+
+%% layout
+%\usepackage{layout}
+%\usepackage[cam,a4,center,info]{crop}% producing trimming marks
+
+
+%% ================================================================
+%% Macors for linguists
+%% ----------------------------------------------------------------
+
+%linguistic examples
+%gb4e 패키지는 xyling 패키지 보다 먼저 불러야 한다.
+%\usepackage{color,xcolor}% gb4e 패키지를 사용할 때 필요하다.
+%\usepackage{gb4e}
+\usepackage{linguex}% lingex requires gb4e
+%\usepackage{avm}
+%\usepackage{parsetree}
+
+
+%% ================================================================
+%% Graphics
+%% ----------------------------------------------------------------
+
+%% includegraphics
+\usepackage{graphicx}
+
+%% PSTricks
+\usepackage{pstricks,pst-node,pst-tree}
+%\usepackage{pst-pdf}
+
+%% Xy-pic
+%% xy 패키지를 로드할 때 dvips 옵션을 주면 
+%% pdflatex으로 컴파일한 PDF 문서에 그림이 나타나지 않는다.
+%% 이 경우에는 latex->dvips->ps2pdf로 컴파일해야 한다.
+%\usepackage[all,color,dvips]{xy}
+%\usepackage[all]{xy}
+%\usepackage{xyling} % xyling requires xy with option dvips. 
+\usepackage{xytree}
+
+%% TikZ
+\usepackage{tikz}
+\usetikzlibrary{positioning,trees,fit,backgrounds,arrows,calc,shapes}
+
+
+
+
+
+
+
+%% ================================================================
+%% Private macros
+%% ----------------------------------------------------------------
+
+\newcommand\term[1]{$\langle$#1$\rangle$}
+\newcommand\emi[1]{`#1'}
+\newcommand\josa[1]{`#1'}
+
+
+
+
+
+\newcommand\Node[2]{\hbox{#1}\ar@{-}[#2]} \xymatrixrowsep{10pt}
+
+
+
+

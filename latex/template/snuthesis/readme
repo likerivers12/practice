@@ -1,0 +1,11 @@
+
+== Class file ==
+ * snuthesis.cls
+
+== Sample files ==
+ * mythesis.sty 
+ * mythesis.tex
+ * 0._include_.tex
+ * 1._include_.tex
+ * abstract-en._include_.tex
+ * references.bbl

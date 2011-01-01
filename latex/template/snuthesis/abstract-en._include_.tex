@@ -1,0 +1,104 @@
+%% projectmain = mythesis.tex
+\pagestyle{plain}
+\setlength\parindent{1.5pc}% 들여쓰기 1글자
+\begin{abstract}
+
+
+\begin{center}
+\normalsize\sc
+{\maketitlebreakwork\bfseries
+The Syntax and Semantics of Korean Complex Sentences:\\
+\small
+a corpus based study of the hierarchical structure of interclausal relations\\
+\maketitlebreaknotwork
+}
+
+\bigskip\small
+by\\
+\normalsize
+YOU Hyun Jo\\
+\bigskip
+\small
+Under the Supervision of Professor KWON Jae-il\\
+Submitted to the Department of Linguistics, Seoul National University,\\
+in partial fulfillment of the requirements for the degree of\\
+Doctor of Philosophy
+\bigskip
+
+August 2008
+\end{center}
+\bigskip
+
+% Movitation
+\noindent
+Korean complex sentences are exceedingly dominant in written texts and
+reportedly not dominant but still  frequent and natural in spoken
+utterances. The verbal endings play the key role in the syntax and semantics
+of the multi-clausal structures. The clause combining with `connective' verbal
+endings or `converb' forms has been studied as one of the most important
+syntactic phenomena since the existence of the traditional Korean grammar and
+considered as one of the most challenging problems of parsing in recent
+computational linguistic research.
+
+% Problem statement
+The syntax of multi-clausal sentences has hardly been studied in traditional
+and modern grammars, in which the discussion has usually been limited to
+describing two-clause sentences and the semantic function of verbal endings. A
+complex sentence with one subordinate clause has the evident clause level syntax
+but one with multiple subordinate clauses has enormous ambiguity exactly like
+in the classical PP attachment problem.
+
+%  What did you try to do? What did yo do?
+In this paper I have attempted to uncover what linguistic information is
+relevant to dealing with structural ambiguity of the complex sentences with
+multiple adjunct `connective' clauses. In Korean grammar, the grammatical
+properties of a clause are viewed as properties of the verb and its ending.
+The corpus analysis was designed to test the hypothesis that the connectives
+determine the clause level syntax.
+
+This study investigated the restriction of the connective verbal endings on
+the structure of the multi-clausal sentences in large corpora. I computed the
+mutual information between the connective endings of adjacent clauses for
+identifying the pattern of clause combining in chapter 4, and extracted
+syntactic dependencies between connective clauses from parsed corpora for
+constructing the hierarchy of connective endings in chapter 5, and examined
+carefully how the polysemy of connective endings affect the syntactic
+structure of the sentence using manually annotated sentences in chpter 6.
+
+% What did you find
+I found no clause combining patterns but consistent hierarchical relationships
+between connective verbal endings. The relative ranks of the endings restrict
+the clause combining. The syntactic structure of a sentence with two
+subordinate clauses `S$_1$-$c_1$ S$_2$-$c_2$ S$_3$' is restricted by the
+relationship between the two connectives $c_1$ and $c_2$: `[[S$_1$-$c_1$
+S$_2$-$c_2$] S$_3$]' if $c_1 < c_2$, `[S$_1$-$c_1$ [S$_2$-$c_2$ S$_3$]]' if
+$c_1 > c_2$. The hierarchy is determined according to the order of the
+semantic functions of the connectives: Contrast > Concession > Condition >
+Interruption > Concurrence > Succession. It can be generalized to the
+hierarchy of coherence relations in the terms of David Hume: Resemblance >
+Cause and Effect > Contiguity.
+
+% What does it means?
+It means that we can apply same rule to the analysis of the multi-clausal
+sentential structures and the multi-sentential discourse structures. The rule
+is a specification of the semantic requirement of the connective
+(the predicate) on its argument (the clauses). I proposed some methods for dealing
+with syntactic and semantic analysis of Korean complex sentences based on the
+philosophy of D-LTAG (Discourse-Lexicalized Tree Adjoining Grammar), SDRT
+(Segmented Discourse Representation Theory) and RST (Rhetorical Structure
+Theory).
+
+\vfill
+\noindent
+Keywords: Korean language, complex sentences, 
+clause-level syntax, discourse semantics, corpora (linguistics), interclausal
+relationships, connectives (linguistics)\\
+Student Number: 2003--30026
+
+
+\end{abstract}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "mythesis"
+%%% End: 

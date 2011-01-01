@@ -1,0 +1,215 @@
+% -*- mode : latex; coding: utf-8 -*- projectmain = mythesis.tex
+%%
+%% Thesis 2007
+%% written by You, Hyun Jo
+%%
+%% @PhDThesis{
+%%		author  = {유현조},
+%%		title   = {한국어 복합문의 통사와 의미},
+%%		school  = {서울대학교},
+%%		year    = {2008},
+%%		month   = {August},
+%%		type    = {박사학위논문},
+%%		keyword = {한국어,복합문,어미,다중절문,어미의 통사적 제약},
+%%	}
+%%
+
+%% 최종 출력
+\documentclass[final,korean,hangul,nonfrench,finemath,a4paper,11pt,twoside,openright]{snuthesis}
+
+%% 화면으로 보기에 편리한 PDF
+%\documentclass[screen,korean,hangul,11pt,twoside,openright]{snuthesis}
+
+\usepackage{mythesis}
+\usepackage{fancyhdr}
+\usepackage{datetime} % for \pdfdate
+
+%%
+%% Declaration
+%%
+    %
+    \author{유현조}
+    %\othername{You, Hyun Jo}
+    \studentid{2003-30026}
+
+    \title{한국어 복합문의 통사와 의미}
+    \subtitle{--- 절 단위 계층 구조에 관한 말뭉치 기반 연구 ---}
+    %\othertitle{Syntax and Semantics of Korean Complex Sentence: \\
+    %         A Study of Structural Constraints on Verbal Endings}
+
+    \degree{문학박사}
+	\degreedate{2008년\hspace{1pc}8월}
+    \degreeyear{2008}
+    \degreemonth{8}
+
+    \department{언어학과}
+    \major{언어학}
+
+
+    \submitdate{2008}{4}
+    \signdate{2008}{7}
+
+    \advisor{권재일}
+
+    \supervisorA{남승호}
+    \supervisorB{권재일}
+    \supervisorC{김주원}
+    \supervisorD{전영철}
+    \supervisorE{목정수}
+
+
+
+%%================================================================
+%% begin document
+%%================================================================
+%\date{2008년 7월 7일}
+\begin{document}
+
+
+
+%\layout
+\maketitle%표지와 인준지 출력
+\makesignedpage
+
+
+\newpage
+\cleardoublepage
+% pagestyle: header and footer
+\pagestyle{fancy}
+\fancyhead[RO,LE]{\thepage}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
+\fancyfoot{}
+\newcommand{\cedp}{%
+	\newpage{\pagestyle{empty}\cleardoublepage}
+}
+
+%국문초록
+\include{0._include_}
+\cedp
+
+
+
+
+\makecontents
+\cedp
+%\tableofcontents
+%\listoffigures
+%\listoftables
+
+%\include{test}
+
+%\citeindextrue
+
+
+%================================================================
+% End-Of-Header
+%================================================================
+
+
+
+\include{1._include_}%서론
+\cedp
+\include{2._include_}%개념
+\cedp
+\include{3._include_}%이론
+\cedp
+\include{4._include_}%문형
+\cedp
+\include{5._include_}%통사 분석
+\cedp
+\include{6._include_}%의미 유형
+\cedp
+\include{7._include_}%통사-의미 구조
+\cedp
+\include{8._include_}%결론
+\cedp
+
+
+%%================================================================
+%% appendix 부록
+%%================================================================
+\appendix
+
+\include{A._include_}%부록
+\cedp
+
+
+
+%================================================================
+% Start-Of-Trailer
+%================================================================
+
+
+%%================================================================
+%% references 참고문헌
+%%================================================================
+%\bibliographystyle{chicago}%{plainnat}%{apacite}%{fullcite}
+%\bibliography{references}
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{참고 문헌}
+\input references.bbl
+\cedp
+
+
+%%================================================================
+%% index 찾아보기
+%%================================================================
+%\clearpage
+%\phantomsection
+%\addcontentsline{toc}{chapter}{찾아보기}
+%\printindex
+%\cedp
+
+%%================================================================
+%% abstract 영문초록
+%%================================================================
+\clearpage
+\phantomsection
+\include{abstract-en._include_}
+\cedp
+
+
+
+%%================================================================
+%% acknowledgement 감사의 글
+%%================================================================
+%\begin{acknowledgement}
+%이것은 감사의 글입니다.
+%\end{acknowledgement}
+
+
+
+
+%%================================================================
+%% PDF Info
+%%================================================================
+\newpage
+\thispagestyle{empty}
+
+\pdfinfo{
+/Author (YOU Hyun Jo)
+/Title (The syntax and semantics of Korean complex sentences: a corpus based approach of the hierarchical structure of interclausal relations)
+/CreationDate (D:\pdfdate)
+/ModificationDate (D:\pdfdate)
+/Subject ()
+/Keywords (Korean language, 
+complex sentences, clause-level syntax, discourse semantics, corpora (linguistics), interclausal relationships, connectives (linguistics))
+}
+
+\rule{0pt}{0pt}
+
+\vfill
+
+\emph{2008-08-08 01:02:38 +0900}
+\end{document}
+
+
+
+
+%%% Local Variables:
+%%% End:
+%%% TeX-header-end: "^% End-Of-Header$"
+%%% TeX-trailer-start: "^% Start-Of-Trailer$"
+%%% End:
