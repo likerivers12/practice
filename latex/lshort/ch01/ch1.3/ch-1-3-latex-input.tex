@@ -1,0 +1,72 @@
+\documentclass{article}
+
+% 패키지는 \documentclass ~ \begin 사이에.
+\usepackage{verbatim}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ch3.3 LaTeX명령
+% p6
+
+I read that Knuth divides the people working with 
+\TeX{} into \TeX{}nicians and \TeX perts. \\
+Today is \today
+
+You can \textsl{lean} on me!
+
+Please, start
+a new line right here!\newline
+Thank you!
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ch3.4 주석
+%p7
+
+% \begin,end{comment}를 사용하려면 verbatim 패키지를 사용해야한다.
+% \usepackage{verbatim}
+%
+This is another 
+\begin{comment}
+rather stupid,
+but helpful
+\end{comment}
+example for embedding
+comments in your document
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 제 4절 입력파일의 구조
+% p7
+%
+
+% 시작       : \documentclass{...}
+% 패키지 포함 : \usepackage{...}
+% 끝        : \end{document}
+
+Small is beautiful
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 제 5절 명령행 작업
+% p8
+
+command line - 
+
+latex foo.tex
+
+xdvi foo.dvi \&
+
+dvips -Pcmz foo.dvi -o foo.ps
+
+dvipdf foo.dvi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\end{document}
