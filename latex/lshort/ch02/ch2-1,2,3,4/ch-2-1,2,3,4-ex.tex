@@ -1,0 +1,201 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Ch 2 텍스트의 조판
+%%% p17
+
+
+%\documentclass[korean,hangul,a4paper, 11pt]{article}
+\documentclass[a4paper, 11pt]{article}
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Ch 2-1 텍스트와 언어의 구조
+%%% p17
+
+
+% Example 1
+\ldots when Einstein introduced his formula
+\begin{equation}
+  e = m \cdot c^2 \; ,
+\end{equation}
+which is at the same time the most widley known
+and the least whell understood physical formula.
+
+
+
+% Example 2
+\ldots from which follows Kirchhoff's current law:
+\begin{equation}
+  \sum_{k=1}^{n} I_k = 0 \; .
+\end{equation}
+Kirchhoff's voltage law can be derived \ldots
+
+% % Example 3
+\ldots which has several advantages.
+
+\begin{equation}
+ I_D = I_F - I_R
+\end{equation}
+is the core of a very different transistor model. \ldots
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Ch 2-2 줄바꿈과 쪽 나눔
+%%% p19
+
+%%% 2-2.1 단락 정렬
+%%% p19
+
+aaa
+\\
+bbb
+\newline
+ccc
+\\*
+ddd
+\newpage
+eee
+% \linebreak[n],
+% \nolinebreak[n],
+% \pagebreak[n],
+% \nopagebreak[n],
+
+
+
+
+
+%%% 2-2.2 분철
+%%% p20
+aaaaa bbbbbb cccccccc ddddddddd eeeeeeeeeee fffffffff ggggggggggg hhhhhhhhh 
+iiiiiiii jjjjjjjj kkkkkkkkkk lllllllll mmmmmmmmm nnnnnnnnn oooooooooo\
+\\
+
+\sloppy
+aaaaa bbbbbb cccccccc ddddddddd eeeeeeeeeee fffffffff ggggggggggg hhhhhhhhh 
+iiiiiiii jjjjjjjj kkkkkkkkkk lllllllll mmmmmmmmm nnnnnnnnn oooooooooo
+\\
+
+\fussy
+aaaaa bbbbbb cccccccc ddddddddd eeeeeeeeeee fffffffff ggggggggggg hhhhhhhhh 
+iiiiiiii jjjjjjjj kkkkkkkkkk lllllllll mmmmmmmmm nnnnnnnnn oooooooooo
+\\
+
+\hyphenation{FORTRAN Hy-phen-a-tion}
+
+I think this is: su\-per\-cal\-%i\-frag\-i\-lis\-tic\-ex\-pi\-%
+al\-i\-do\-cious
+
+
+% 여러 낱말들을 줄바꿈 없이 같은 줄에 두고 싶을 때
+% \mbox{text}
+My phone number will change soon.
+It will be \mbox{0116 291 2319}.
+
+The parameter 
+\mbox{\emph{filename}} should
+contain the name of the file
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Ch 2-3 미리 정의된 문자열
+%%% p21
+
+\today
+\\
+
+\TeX
+\\
+
+\LaTeX
+\\
+
+\LaTeXe
+\\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Ch 2-4 특수 문자와 기호
+%%% p21
+
+%%% 2-4.1 따옴표
+%%% p21
+
+''Please press the 'x' key.''
+
+
+
+%%% 2-4.2 대시와 하이픈
+%%% p22
+
+daughter-in-law, X-rated\\
+pages 13-67\\
+yes---or no?\\
+$0$, $1$ and $-1$
+\newline
+
+
+%%% 2-4.3 틸데(~)
+%%% p22
+
+http://www.rich.edu/\~{}bush \\
+http://www.clever.edu/$\sim$demo
+\newline
+
+% \url{http://people.ktug.or.kr/~karnes/
+% demo/lshort-kr/index.html}
+
+
+%%% 2-4.4 도 기호
+%%% p23
+
+It's $-30\,^{\circ}\mathrm{C}$.
+I will soon start to super-conduct
+\newline
+
+
+%%% 2-4.5 유로 통화 기호
+%%% p23,4
+
+% \usepackage{textcomp}
+% \texteuro
+
+
+%%% 2-4.6 줄임표(...)
+%%% p24
+
+Note like this ... but like this: \\
+New York, Tokyo, Budapest, \ldots
+\newline
+
+
+
+%%% 2-4.7 합자
+%%% p25
+
+\Large Not shelfful\\
+but shelf\mbox{}ful
+\newline
+
+
+%%% 2-4.8 강세 부호와 특수 문자
+%%% p25
+
+H\^otel, na\"\i ve, \'el\`eve,\\
+sm\o rrebr\o d, !`Se\~norita!,\\
+Sch\"onbrunner Schol\ss{}
+Stra\ss e
+\newline
+
+
+\`o \'o \^o \~o 
+\=o \.o \"o \c c\\
+\u o \v o \H o \c o
+\d o \b o \t oo
+\oe \OE \ae \AE\\
+\aa \AA \o \O \l \L \i \j !` ?`
+
+
+
+\end{document}
