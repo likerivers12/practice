@@ -1,0 +1,94 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Ch 2 텍스트의 조판
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ch 2-7 제목과 장, 절
+%%% p35
+
+
+%\documentclass[korean,hangul,a4paper, 11pt]{article}
+%\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper, 11pt]{book}
+
+% \usepackage{ucs}
+% \usepackage[utf8]{inputenc}
+
+
+% 한국어 문서
+% p30
+\usepackage[hangul, nonfrench]{dhucs}
+
+
+
+\begin{document}
+
+% \begin{document} 바로 다음에 두기. 
+% 쪽 번호를 로마 숫자로,
+% 장절에 번호가 붙여지지 않게
+% p37
+\frontmatter
+
+
+
+%%% 표제에 포함될 내용
+%%% p36
+\title{TITLE}
+\author{손수일\and수일손}
+\date{날짜}
+\maketitle
+
+
+그러나 그 시절에 너를 또 만나서 사랑할 수 있을까? 흐르는 그 세월에 너는 또 얼마나 많은 눈물을 흘리려나.
+
+% 책의 첫 장 발로 앞에
+% 쪽 번호를 아라비아 숫자로 바꾸고, 쪽 번호 매김을 다시 시작
+% p37
+\mainmatter
+
+%% 차례와 컴파일 횟수 : 어떤 경우는 두번, 세번 컴파일해야 올바른 차례를 얻을 수 있다.
+\tableofcontents
+
+
+
+% part 명령은 장의 번호 매김에 영향을 끼치지 않는다.
+\part{part1}
+강나루 건너 밀밭길을 구름에 달 가듯 가는 나그네. 길은 외줄기 남도 삼백리 술 익는 마을마다 타는 저녁놀. 강나루 건너 밀밭길을 구름에 달 가듯 가는 나그네.
+
+
+% report와 book 클래스에서 추가 사용 가능한 최상위 장절 명령
+\chapter{chapter 1}
+소리없이 눈이 내리네. 소복소복 소리도 없이. 하늘나라 선녀님들이 하얀 선물 내려주나봐. 뽀드득 뽀드득. 발자욱 소리는 고요한 밤길에 노래소리 퍼지네. 하늘나라 선녀님들이 하얀 선물 내려주나봐.
+
+
+% article 클래스에서 사용할 수 있는 장절
+\section{section 1}
+나보기 역겨줘 가실 때에는 말없이 고이 보내드리오리다 .영변에 약산 진달래꽃 아름따다 가시는 길에 고이 뿌리드리오리다. 가시는 걸음걸음 놓인 그 꽃을 사뿐히 즈려밟고 가시옵소서. 나보기 역겨워 가실 때에는 죽어도 아니 눈물 흘리오리다.
+\subsection{subsection 1}
+동해물과 백두산이 마르고 닳도록, 하느님이 보우하사 우리 나라 만세. 무궁화 삼천리 화려강산. 대한 사람 대한으로 길이 보전하세.
+\subsection{subsection 2}
+학교종이 땡땡땡, 어서 모이자. 선생님이 우리를 기다리신다. 솔솔라라 솔솔미 솔솔 미미레 솔솔라라 솔솔미 솔미레미도
+\subsubsection{subsubsection 1}
+\subsubsection{subsubsection 2}
+\paragraph{paragraph 1}
+동구밭 과수원길 아카시아 꽃이 활짝 폈네. 하얀 꽃 이파리 눈 송이처럼 날리네. 향긋한 꽃 냄새가 실바람타고 솔솔.
+\paragraph{paragraph 2}
+\subparagraph{subparagraph 1}
+얼어붙은 달 그림자 물결 위에 자고. 한 겨울의 거센 파도 모으는 작은 섬. 생각하라 저 등대를 지키는 사람의 거룩하고 아름다운 사랑의 마음을.
+\subparagraph{subparagraph 2}
+
+
+
+\appendix
+\section{}
+aaaa
+\section{}
+bbbb
+
+\backmatter{}
+참고문헌1\\
+참고문헌2\\
+
+
+
+\end{document}
