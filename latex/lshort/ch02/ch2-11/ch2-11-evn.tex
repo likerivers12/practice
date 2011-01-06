@@ -1,0 +1,139 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Ch 2 텍스트의 조판
+
+%\documentclass[korean,hangul,a4paper, 11pt]{article}
+%\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper, 11pt]{article}
+
+% \usepackage{ucs}
+% \usepackage[utf8]{inputenc}
+
+% 한국어 문서
+% p30
+\usepackage[hangul, nonfrench]{dhucs}
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ch 2-11 환경
+%%% p39
+
+% \begin{env} text \end{env}
+
+%%%---------------------
+%%% ch 2-11.1 Itemize, Enumerate, Description 환경
+\flushleft
+\begin{enumerate}
+  \item You can mix the list environments to your taste:
+
+  \begin{itemize}
+    \item But it might start to look silly
+    \item[-]With a dash.
+  \end{itemize}
+  \item Therefore remember:
+
+  \begin{description}
+    \item[Stupid] things, will not become smart because they are in a list.
+    \item[Smart] things, though, can be presented beautifully in a list.
+  \end{description}
+\end{enumerate}
+
+
+%%%---------------------
+%%% ch 2-11.2 Flushleft, Flushright, Center 환경
+\begin{flushleft}
+  This text is\\ left-aligned. \LaTeX{} is not trying to make each line the same length.
+\end{flushleft}
+
+\begin{flushright}
+  This text is right-\\aligned. \LaTeX{} is not trying to make each line the same length.
+\end{flushright}
+
+\begin{center}
+  At the centre\\of the earth
+\end{center}
+
+
+%%%---------------------
+%%% 2-11.3 Quote, Quotation, Verse 환경
+%%% p40
+A typographical rule of thumb for the line length is:
+\begin{quote}
+  On average, no line should be longer than 66 characters.
+\end{quote}
+This is why \LaTeX{} pages have such large borders by default and
+also why multicolumn print is used in newspapers.
+\\
+
+I know only one English poem by heart. It is about Humpty Dumpty.
+\begin{flushleft}
+  \begin{verse}
+    Humpty Dumpty sat on a wall:\\
+    Humpty Dumpty had a great fall.\\
+    All the King's horses and all the King's men\\
+    Couldn't put Humpty together again.
+  \end{verse}
+\end{flushleft}
+
+
+%%%---------------------
+%%% 2-11.4 Abstract 환경
+%%% p41
+\begin{abstract}
+  The abstract abstract.
+\end{abstract}
+
+
+%%%---------------------
+%%% 2-11.5 Verbatim 환경
+%%% p42
+
+%%% \begin{verbatim} ~ \end{verbatim}
+%%% 문서의 내용 그대로 출력
+
+%%% 개별 단락안에서
+%%% \verb+text+
+
+The \verb|\ldots| command \ldots
+
+\begin{verbatim}
+10 PRINT "HELLO WORLD ";
+20 GOTO 10
+\end{verbatim}
+
+\begin{verbatim*}
+the starred version of the       verbatim
+environment emphasizes the spaces    in the text
+\end{verbatim*}
+
+\verb*|like   this :-) |
+
+
+%%%---------------------
+%%% 2-11.6 Tabular 환경
+
+%\begin{tabular}[pos]{table spec}
+
+\begin{tabular}{|r|l|}
+\hline
+  7C0 & hexadecimal \\
+  3700 & octal \\ 
+
+  \cline{2-2}
+  11111000000 & binary \\
+
+\hline 
+\hline
+  1984 & decimal \\
+\hline
+\end{tabular}
+
+
+
+
+
+
+\end{document}
+
