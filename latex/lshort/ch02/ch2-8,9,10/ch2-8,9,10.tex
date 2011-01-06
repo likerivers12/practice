@@ -1,0 +1,73 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Ch 2 텍스트의 조판
+
+%\documentclass[korean,hangul,a4paper, 11pt]{article}
+%\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper, 11pt]{article}
+
+% \usepackage{ucs}
+% \usepackage[utf8]{inputenc}
+
+% 한국어 문서
+% p30
+\usepackage[hangul, nonfrench]{dhucs}
+
+
+\begin{document}
+
+
+
+\section{}
+This is a section
+\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ch 2-8 상호 참조
+%%% p37
+
+% label{marker}, \ref{marker} and \pageref{marker}
+
+A reference to this subsection 
+\label{sec:this} looks like:
+``see section~\ref{sec:this} on
+page~\pageref{sec:this}.''
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ch 2-9 각주
+%%% p38
+Foot\footnote{This is a footnote.}
+are often used by people using \LaTeX
+\\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ch 2-10 강조
+%%% p38
+
+사랑했던 \underline{너를 잊지 못해}. 부디 너를 다시 볼 수 있다면 기다릴 수 있어. 잠시 멀리있는 거야.\\
+\emph{안녕 슬픈 우리 사랑}. 삶이 끝나는 날까지 남아서 눈물이 된다는 마지막 고백 지울 수 없겠지.
+\\
+
+% p38
+\emph{If you use emphasizing inside a piece of emphasized text, then \LaTeX{} uses the
+\emph{normal} font for emphasizing.}
+
+
+
+%%% p39
+\textit{You can also 
+  \emph{emphasize} text if it is set in italics,}
+\textsf{in a
+  \emph{sans-serif} font,}
+\texttt{or in
+  \emph{typewriter} style.}
+
+
+
+
+
+
+\end{document}
