@@ -1,0 +1,140 @@
+@c -----------------------------------------
+@c Part 1 : Header
+@c -----------------------------------------
+
+\input texinfo
+@setfilename texinfo
+@settitle texinfo 시작하기
+
+@c -----------------------------------------
+
+
+
+
+
+
+
+@c -----------------------------------------
+@c Part 2 : Summary Description and Copyright
+@c -----------------------------------------
+
+@copying
+This manual is for program, version ..
+
+Copyright @copyright{}years copyright-owner.
+
+@quotation
+Permission is granted to ...
+@end quotation
+@end copying
+
+@c -----------------------------------------
+
+
+
+
+
+
+
+@c -----------------------------------------
+@c Part 3 : Titlepage, Contents, Copyright
+@c -----------------------------------------
+
+@titlepage
+@title name-of-manual-when-printed
+@subtitle subtitle-if-any
+@subtitle second-subtitle
+@author author
+
+@c  The following two commands
+@c  start the copyright page.
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+
+Published by …
+@end titlepage
+
+@c -----------------------
+
+
+@c -----------------------
+@c Output the table of contents at the beginning.
+@contents
+
+
+
+
+
+
+
+@c -----------------------------------------
+@c Part 4: 'Top' Node and Master Menu
+@c -----------------------------------------
+@ifnottex
+@node Top
+@top Title
+
+@insertcopying
+@end ifnottex
+
+@c -----------------------
+@menu
+* First Chapter::    Getting started
+* Second Chapter::   BB      
+* Index::
+@end menu
+@c -----------------------
+
+
+
+
+
+
+
+@c -----------------------------------------
+@c Part 5: The Body of the Document
+@c -----------------------------------------
+
+@c -------------------------------
+@node First Chapter
+@chapter First Chapter
+
+@cindex chapter, first
+
+This is the first chapter
+@cindex index entry, another
+
+Here is a numbered list
+
+
+@c ------------------
+@enumerate
+@item
+This is the first item.
+
+@item
+This is the second item.
+@end enumerate
+
+
+
+
+@c -------------------------------
+@node Second Chapter
+@chapter Second Chapter
+
+
+
+
+@c -----------------------------------------
+@c Part 6: The End of the Document
+@c -----------------------------------------
+ 	
+@node Index
+@unnumbered Index
+
+@printindex cp
+
+
+@bye
