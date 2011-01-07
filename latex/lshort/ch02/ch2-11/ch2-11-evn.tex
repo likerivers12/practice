@@ -131,6 +131,38 @@ environment emphasizes the spaces    in the text
 \end{tabular}
 
 
+% 열 구분자 @{...}
+\begin{tabular}{@{} l @{}}
+\hline
+  no leading space\\
+\hline
+\end{tabular}
+
+\begin{tabular}{l}
+\hline
+  leading space left and right\\
+\hline
+\end{tabular}
+
+
+
+\begin{tabular}{c r @{.} l}
+Pi expression  &
+\multicolumn{2}{c}{Value} \\
+\hline
+$\pi$            &   3&1416 \\
+$\pi^{\pi}$        & 36&46 \\
+$(\pi^{\pi})^{\pi}$ & 80662&7 \\
+\end{tabular}
+
+\begin{tabular}{|c|c|}
+\hline
+\multicolumn{2}{|c|}{Ene} \\
+\hline
+Mene & Muh! \\
+\hline
+\end{tabular}
+
 
 
 
