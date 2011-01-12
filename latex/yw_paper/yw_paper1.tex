@@ -1,25 +1,84 @@
-\message{ !name(yw_paper1.tex)}
-%\documentclass[korean,hangul,a4paper, 11pt]{article}
-%\documentclass[a4paper, 11pt]{article}
+
 \documentclass[a4paper,twocolumn, 10pt]{article}
 
 %%% 그림 관련
 \usepackage[dvips]{graphicx}
 \usepackage{subfigure}
 
-% \usepackage{ucs}
-% \usepackage[utf8]{inputenc}
 
-% 한국어 문서
-% p30
-%\usepackage[hangul, nonfrench]{dhucs}
-
-\author{Suil Son, Young-Woon Cha, and Suk I. Yoo}
 \title{Abnormal Object Detection Using Second-Order Spatio-Temporal Background Model}
+\author{Suil Son, Young-Woon Cha, and Suk I. Yoo}
+
 
 \begin{document}
 
-\message{ !name(yw_paper1.tex) !offset(406) }
+\maketitle
+
+\begin{abstract}
+\emph{
+This paper presents the robust background subtraction method in dynamic background constraints. 
+One problem of other methods is that as they used color-based density estimation, they could suffer from the so-called camouflage problem. This typically occurs when the color is similar to its background even when its shape is sharply different. Thus, shape features should be combined to the background model.
+Moreover, since dynamic backgrounds are varying frequently, other first-order background subtraction methods gives unwanted false-alarms in those images due to the variance of the background. Thus, the background model should be extended to include nonstaionary background as normal. 
+This paper suggests the spatio-temporal background model by introducing shape features and demonstrates significant improvements in detection. This paper also proposes the variation subtraction method by extending background model into the second-order space. After variation subtraction, the stable response on dynamic background images facilitates reliable thresholding for abnormality decision. 
+The proposed method was tested on Natural scenes with dynamic background for object recognition and Semi-conductor wafer SEM (Scanning electron microscope) images with noise for defect detection. Experiments show that our algorithm enhanced the discrimination and successfully suppressed false-alarms from dynamic background.
+}
+
+Keywords:  background subtraction, defect detection, foreground detection, object recognition, shape matching
+
+\end{abstract}
+
+
+\section{Introduction}
+The main goal of the visual surveillance in computer vision is to classify abnormal events based on prior or domain knowledge. The prior knowledge can be expressed by modeling normality using training examples. If given inspection data is similar to the training examples, they are classified as background (normal pattern) and others as foreground (abnormal pattern). This problem is called Foreground detection.
+  The background subtraction methods have been proposed to deal with the problem. The stationary background assumption of those methods is that images are captured by fixed camera, and that those images consist of stationary background. The stationary background has the consistency with respect to color and its position. Those approaches can be applied to various areas such as object recognition, object tracking, defect detection, and visual surveillance.
+  However, the development of robust background model has been demanding to contain dynamic backgrounds. The stationary background assumption is violated if their images contain dynamic backgrounds. That is, the conventional background model could not sufficiently explain followings: the camouflage foreground which color is similar to its background and the dynamic background which position has been frequently changed. 
+  Dynamic background constraints are natural conditions in object recognition and defect detection. The dynamic images appear where natural scenes with nonstationary objects such as swaying trees, fountains, moving cars and people. Dynamic background images also include misalignment images captured by hand-held cameras and include noised images – highly zoomed-in images, and dynamic textured images. Semi-conductor wafer SEM (Scanning electron microscope) images are one example. Even after alignments of those dynamic background images, small misalignments remain due to the variance of the background. Other methods mostly conducted their experiments on video, but the suggested method regards the input as a set of independent images with respect to time for applying to general applications.       
+Some problems, however, occur when using the first-order color-based background subtraction methods to deal with the dynamic background images. The color-based background models could suffer from the so-called camouflage problem. (See figure 1). False-negatives occur when its color is similar to its background even when their shapes are sharply different. Thus, shape features should be combined into the background model. 
+
+\begin{figure}[t]
+  \begin{center}
+  \label{fig10}
+  \subfigure[ ]{includegraphics[width=0.3\textwidth]{paper-fig/fig10-1}}\hfill
+  \subfigure[ ]{includegraphics[width=0.3\textwidth]{paper-fig/fig10-1}}\hfill
+  \subfigure[ ]{includegraphics[width=0.3\textwidth]{paper-fig/fig10-1}}
+  \caption{Camouflage Problem. The third column shows the foreground detection result using stationary background model. The camouflage foregrounds were misclassified though their shapes are sharply different to the background}
+  \end{center}
+\end{figure}
+
+
+
+\section{Related Work}
+
+
+\section{Spatio-Temporal Consistency}
+
+
+\subsection{Suggested Formulation}
+
+
+
+\section{Spatio-Temporal Consistency}
+
+\subsection{First-order Spatio-Temporal Background Model}
+
+\subsection{Second-order Spatio-Temporal Background Model}
+
+
+
+\section{Experimental Result}
+
+
+\subsection{Application to Object Recognition of Dynamic scenes}
+
+\subsection{Application to Defect Detection of Highly Noised SEM images}
+
+
+
+\section{Discussion}
+
+
+
+
 
 The foreground likelihood descriptor \begin{math} h_L(x) \end{math} and the expected likelihood descriptor
 \begin{math} h_b(\hat{x}) \end{math} can be built from \begin{math} L(x), E(L(\hat{x})) \end{math} respectively.
@@ -32,7 +91,18 @@ Also, the positional displacement within one pixel neighbors is considered using
 By matching histograms between \begin{math} E(\hat{L}) \end{math} and \begin{math} L, L^2 \end{math} can be obtained.
 Note that normal dynamic backgrounds are successfully suppressed close to 0, while keeping foregrounds' likelihood from being smoothed.
 
-\message{ !name(yw_paper1.tex) !offset(678) }
+
+
+
+
+
+
+
+\bibliographystyle{ams[lain}
+\bibliography{test}
+
+
+
 
 \end{document}
 
