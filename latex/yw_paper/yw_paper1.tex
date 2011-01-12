@@ -1,0 +1,39 @@
+\message{ !name(yw_paper1.tex)}
+%\documentclass[korean,hangul,a4paper, 11pt]{article}
+%\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper,twocolumn, 10pt]{article}
+
+%%% 그림 관련
+\usepackage[dvips]{graphicx}
+\usepackage{subfigure}
+
+% \usepackage{ucs}
+% \usepackage[utf8]{inputenc}
+
+% 한국어 문서
+% p30
+%\usepackage[hangul, nonfrench]{dhucs}
+
+\author{Suil Son, Young-Woon Cha, and Suk I. Yoo}
+\title{Abnormal Object Detection Using Second-Order Spatio-Temporal Background Model}
+
+\begin{document}
+
+\message{ !name(yw_paper1.tex) !offset(406) }
+
+The foreground likelihood descriptor \begin{math} h_L(x) \end{math} and the expected likelihood descriptor
+\begin{math} h_b(\hat{x}) \end{math} can be built from \begin{math} L(x), E(L(\hat{x})) \end{math} respectively.
+The similarity of \begin{math} h_L(x) \end{math}  and \begin{math} h_b(\hat{x}) \end{math} can be obtained using 
+\begin{math} \chi ^2 \end{math} test ( 7 ) and is called the second-order foreground likelihood \begin{math} L^2(x) \end{math}.
+Also, the positional displacement within one pixel neighbors is considered using ( 12 ).
+
+\ref{fig90} shows an example of variation subtraction process. (a), (b) represent \begin{math} E(\hat{L}) \end{math}.
+(d), (g) indicates \begin{math} L \end{math}. (e), (h) are \begin{math} L^2 \end{math}.
+By matching histograms between \begin{math} E(\hat{L}) \end{math} and \begin{math} L, L^2 \end{math} can be obtained.
+Note that normal dynamic backgrounds are successfully suppressed close to 0, while keeping foregrounds' likelihood from being smoothed.
+
+\message{ !name(yw_paper1.tex) !offset(678) }
+
+\end{document}
+
+
