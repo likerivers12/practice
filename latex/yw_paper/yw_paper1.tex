@@ -43,7 +43,7 @@ The main goal of the visual surveillance in computer vision is to classify abnor
       
 Some problems, however, occur when using the first-order color-based background subtraction methods to deal with the dynamic background images. The color-based background models could suffer from the so-called camouflage problem. (See figure \ref{fig:10}). False-negatives occur when its color is similar to its background even when their shapes are sharply different. Thus, shape features should be combined into the background model. 
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:10}
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig10-1}}\hfill
@@ -52,7 +52,7 @@ Some problems, however, occur when using the first-order color-based background 
   \caption{Camouflage Problem. The third column shows the foreground detection result using stationary background model. The camouflage foregrounds were misclassified though their shapes are sharply different to the background}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:20}
 %  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig20-1}}\hfill
@@ -130,15 +130,14 @@ Shape matching algorithms find similar shapes by comparing spatial distribution 
 \begin{math} h_i(k) \end{math} and \begin{math} h_j(k) \end{math}  denote the \begin{math} K \end{math}-bin normalized histogram at \begin{math} p_i \end{math} and \begin{math} p_j \end{math}, respectively. (7) is equivalent to the likelihood ratio test in \cite{Sheikh, Bebezeth}.
 
 
-
 \section{Spatio-Temporal Consistency}
-The suggested method considers spatial and temporal consistency jointly to estimate how much given inspection image is consistent with training examples. The spatial relation can be expressed by Shape distribution with respect to space. Also, the temporal relation can be represented by intensity distribution over time. Thus, the problem domain can be modeled in the structure of Spatio-Temporal Markov Random Field Model [1]. The proposed method is formulated based on the S-T MRF model.
+The suggested method considers spatial and temporal consistency jointly to estimate how much given inspection image is consistent with training examples. The spatial relation can be expressed by Shape distribution with respect to space. Also, the temporal relation can be represented by intensity distribution over time. Thus, the problem domain can be modeled in the structure of Spatio-Temporal Markov Random Field Model \cite{Kamijo}. The proposed method is formulated based on the S-T MRF model.
 
-Figure 4 shows the relation of Spatio-Temporal neighborhood on training image set. Each parallelogram represents a training image. A point   denotes (i, j) pixel on nth training image having x intensity. Subscript indicates temporal neighborhoods of x. Temporal consistency means that an intensity of a point   on inspection image should be statistically consistent with the intensities of  . 
+Figure \ref{fig:40} shows the relation of Spatio-Temporal neighborhood on training image set. Each parallelogram represents a training image. A point \begin{math} \hat{x}_n^{i,j} \end{math}  denotes \begin{math} (i, j) \end{math} pixel on nth training image having \begin{math} x \end{math} intensity. Subscript indicates temporal neighborhoods of \begin{math} x \end{math}. Temporal consistency means that an intensity of a point \begin{math} x \end{math} on inspection image should be statistically consistent with the intensities of \begin{math} \hat{X} \equiv ( \hat{x}_1, ..., \hat{x}_N)^T \end{math}. 
 
-Also,   represents spatial neighborhoods of  , such that  . Thus, the spatio-temporal consistency means that a component   should be statistically consistent with  . To avoid the curse of dimensionality, the spatial relation of   can be parameterized using gradients. Thus,   is equivalent to  . The spatio-temporal consistency can be represented by  . 
+Also, \begin{math} \hat{x}_i^C \end{math} represents spatial neighborhoods of \begin{math} \hat{x}_i \end{math}, such that \begin{math} \hat{x}^C = \{ x^{a,b} | |a-i| < c, | b - j | < c \} \end{math} . Thus, the spatio-temporal consistency means that a component  \begin{math} \hat{x}^C \end{math}  should be statistically consistent with  \begin{math} \hat{X} \equiv [( \hat{x}_1^C), ..., (\hat{x}_N^C) ]^T \end{math}. To avoid the curse of dimensionality, the spatial relation of \begin{math} x^C \end{math} can be parameterized using gradients. Thus, \begin{math} P(Spatial,Temporal) \end{math} is equivalent to \begin{math} P(component) \end{math}. The spatio-temporal consistency can be represented by \begin{math} P(Shape, Intensity) \end{math}. 
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:40}
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig40-1}}\hfill
@@ -150,7 +149,7 @@ Also,   represents spatial neighborhoods of  , such that  . Thus, the spatio-tem
 \subsection{Suggested Formulation}
 The suggested approach estimates both background’s density and its variation for dynamic background subtraction. The main procedure has two stages. (See figure 4). In the training stage, a set of foreground likelihood   is estimated from given a set of positive images   using first-order background subtraction based on  . Then, the background variation model is assumed to be a uni-modal for speed and compact representation. It can be estimated simply by taking expectation of  . In the inspection stage, first-order background subtraction and second-order variation subtraction are linearly performed. By matching similarity between a foreground likelihood   and an expected likelihood  , a second-order foreground likelihood   can be estimated.
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:50}
   \subfigure[ ]{\includegraphics[width=0.5\textwidth]{paper-fig/fig50}}
@@ -169,7 +168,7 @@ The first two variables are for a spatial relation that is represented by log-po
 
 A probability of normality   on S-T domain can be estimated using (1), (8). Figure 6 shows examples of S-T background density. Note that the dynamic regions are containing multi-modal density, while static regions are maintaining uni-modal density.
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:60}
   \subfigure[ ]{\includegraphics[width=0.5\textwidth]{paper-fig/fig60}}
@@ -201,7 +200,7 @@ In addition, positional distribution is considered using (12) for handling small
 \end{equation}
 where N is the number of  . Figure 7 shows an example of the expected likelihood descriptor. Bright regions indicate highly variant background, whereas dark regions represent static background.
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:70}
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig70-1}}\hfill
@@ -222,7 +221,7 @@ The background variation subtraction can be performed by comparing spatial simil
 
 A local descriptor for each pixel can be built by sampling local distribution of the   into a local histogram. Local smoothness assumption for robustness and centered-focus for distinctiveness can be achieved by building Shape descriptor, [12, 14]. This can be done by center-biased sampling. Figure 8 shows an example. Each box represents a pixel on image patch. The number in each box means an index of the descriptor. The same indexed pixels are taken into a mean for the centered-focus when sampling them into their descriptor. So, 5×5 spatial distribution can be captured in the 9-bin descriptor. 
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:80}
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig80-1}}\hfill
@@ -244,7 +243,7 @@ Note that normal dynamic backgrounds are successfully suppressed close to 0, whi
 
 
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:90}
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig90-a}}\hfill
@@ -270,7 +269,7 @@ These image set contain dynamic background, and there are small transitional, ro
 
 Camouflage problem occurs in the temporal model shown in the first column. The foregrounds having similar intensity to their background were missed. The discrimination is enhanced in the first-order spatio-temporal model in the second column, whereas false-alarms increased. After variation subtraction in the third column, the dynamic backgrounds are successfully suppressed. Also, thanks to the stable response of  , the global threshold T chosen from Otsu’s method was working well. Those results show our method is distinctive and robust in dynamic background constraints.
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:100}
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-1}}\hfill
@@ -288,7 +287,7 @@ Camouflage problem occurs in the temporal model shown in the first column. The f
   \caption{Object Recognition on natural scenes. The second row shows foreground likelihoods. The third row shows thresholding images. Those are 194×150 sized images. 32 positive images were used for training. 3 negative images were used for training threshold}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:110}
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-1}}\hfill
@@ -313,7 +312,7 @@ In figure 12, T-model missed defects having similar colors, which shows it is du
 
 A decision of defect image is crucial in defect detection. Thus, the classification rate has been used for performance evaluation. Table 3 shows the classification rate of the defect detection in SEM images. Note that false positives are significantly decreased.
 
-\begin{table}[t]
+\begin{table}[!t]
   \centering
   \label{tab:10}
   \caption{Classification rate for defect detection}
@@ -337,7 +336,7 @@ A decision of defect image is crucial in defect detection. Thus, the classificat
   \caption{Defect Detection on SEM images. The second row shows foreground likelihoods. The third row shows thresholding images. Those are 111×111 sized images. 33 positive images were used for training. 3 negative images were used for training threshold.}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[!t]
   \centering
   \label{fig:130}
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-1}}\hfill
