@@ -81,6 +81,7 @@
     
     #-(or sbcl cmu lispworks openmcl allegro clisp)
     (error "list-directory not implemented")))
+;; (list-directory (pathname-as-directory "d:/data/pr/lisp"))
 
 ;; (directory (directory-wildcard (pathname-as-directory "d:/data/pr/lisp")))
 ;; (#P"D:\\data\\pr\\lisp\\zpng-test.lisp"
