@@ -60,6 +60,7 @@
 	   (depth (send bm get-depth)))
       (send bm-dc set-argb-pixels 0 0 width height img-data)))
 
+;;;;;;
 (define (test-get-set-and-show bm)
     (let* ((bm-dc (make-bm-dc bm))
 	   (img-data (get-image-data bm-dc bm)))

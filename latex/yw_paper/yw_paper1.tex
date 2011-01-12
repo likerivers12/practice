@@ -30,47 +30,318 @@ Keywords:  background subtraction, defect detection, foreground detection, objec
 
 \section{Introduction}
 The main goal of the visual surveillance in computer vision is to classify abnormal events based on prior or domain knowledge. The prior knowledge can be expressed by modeling normality using training examples. If given inspection data is similar to the training examples, they are classified as background (normal pattern) and others as foreground (abnormal pattern). This problem is called Foreground detection.
+
   The background subtraction methods have been proposed to deal with the problem. The stationary background assumption of those methods is that images are captured by fixed camera, and that those images consist of stationary background. The stationary background has the consistency with respect to color and its position. Those approaches can be applied to various areas such as object recognition, object tracking, defect detection, and visual surveillance.
-  However, the development of robust background model has been demanding to contain dynamic backgrounds. The stationary background assumption is violated if their images contain dynamic backgrounds. That is, the conventional background model could not sufficiently explain followings: the camouflage foreground which color is similar to its background and the dynamic background which position has been frequently changed. 
-  Dynamic background constraints are natural conditions in object recognition and defect detection. The dynamic images appear where natural scenes with nonstationary objects such as swaying trees, fountains, moving cars and people. Dynamic background images also include misalignment images captured by hand-held cameras and include noised images – highly zoomed-in images, and dynamic textured images. Semi-conductor wafer SEM (Scanning electron microscope) images are one example. Even after alignments of those dynamic background images, small misalignments remain due to the variance of the background. Other methods mostly conducted their experiments on video, but the suggested method regards the input as a set of independent images with respect to time for applying to general applications.       
+
+  However, the development of robust background model has been demanding to contain dynamic backgrounds. The stationary background assumption is violated if their images contain dynamic backgrounds. That is, the conventional background model could not sufficiently explain followings: the camouflage foreground which color is similar to its background and the dynamic background which position has been frequently changed.
+ 
+  Dynamic background constraints are natural conditions in object recognition and defect detection. The dynamic images appear where natural scenes with nonstationary objects such as swaying trees, fountains, moving cars and people. Dynamic background images also include misalignment images captured by hand-held cameras and include noised images – highly zoomed-in images, and dynamic textured images. Semi-conductor wafer SEM (Scanning electron microscope) images are one example. Even after alignments of those dynamic background images, small misalignments remain due to the variance of the background. Other methods mostly conducted their experiments on video, but the suggested method regards the input as a set of independent images with respect to time for applying to general applications. 
+      
 Some problems, however, occur when using the first-order color-based background subtraction methods to deal with the dynamic background images. The color-based background models could suffer from the so-called camouflage problem. (See figure 1). False-negatives occur when its color is similar to its background even when their shapes are sharply different. Thus, shape features should be combined into the background model. 
 
 \begin{figure}[t]
-  \begin{center}
+  \centering
   \label{fig10}
+<<<<<<< HEAD
   \subfigure[ ]{includegraphics[width=0.3\textwidth]{paper-fig\fig10-1}}\hfill
   \subfigure[ ]{includegraphics[width=0.3\textwidth]{paper-fig\fig10-1}}\hfill
   \subfigure[ ]{includegraphics[width=0.3\textwidth]{paper-fig\fig10-1}}
+=======
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig10-1}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig10-2}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig10-3}}
+>>>>>>> f7d017504f5aa2950ba37be0fe7df835eb183b6c
   \caption{Camouflage Problem. The third column shows the foreground detection result using stationary background model. The camouflage foregrounds were misclassified though their shapes are sharply different to the background}
-  \end{center}
 \end{figure}
+
+\begin{figure}[t]
+  \centering
+  \label{fig20}
+%  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig20-1}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig20-2}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig20-3}}
+  \caption{Imbalance of background density. The first row illustrates a dynamic background image. There are swaying trees and small misalignments. The second row shows intensity distribution of the background in three different regions and straight lines are global thresholds. The third row represents detection result. Note that since other background subtraction methods try to classify foregrounds using a single threshold, false-positives are increased due to the imbalance among each background density.}
+\end{figure}
+
+
+Moreover, as dynamic backgrounds are varying frequently, the stationary background model based approaches generate many false-positives in those images due to the imbalance among each background density. (See figure 2). Thus, the background model should be extended to include nonstaionary backgrounds as normal. 
+This paper presents the robust background model for containing dynamic backgrounds. In Section 2, the previous works and background works for the proposed method are discussed. 
+
+The proposed work has two novel contributions: Firstly, the background is modeled on the shape-intensity joint domain, so it can estimate shape and intensity change simultaneously and improves discrimination compared to other intensity-based background models. Secondly, since background dynamics can be explained in the second-order space, we suggest the second-order background model for removing background’s variation. The suggested variation subtraction method generates stable response on dynamic background images and thus the threshold selection methods can be reliably applied to this model. In Section 3, 4, the suggested formulation and detailed algorithm is presented.
+
+This method was tested on Natural scenes with dynamic background for object recognition and Semi-conductor wafer SEM images with noise for defect detection. The results show that the algorithm enhanced discrimination and successfully suppressed false-alarms from dynamic background. In Section 5, 6, detailed analysis and the experimental results are discussed, respectively.
 
 
 
 \section{Related Work}
 
+Background subtraction approaches can be categorized by their feature space. The first background subtraction methods [2, 3, 4] suggested statistical methods based on temporal consistency by assuming the single background modal. Single Gaussian [3] or median [4] was used for modeling background. Then, the mixture of Gaussians [5] was introduced for extending background model to the multi-modal. 
+
+Non-parametric background model using kernel density estimation [6] was introduced. The rest of the background subtraction algorithms also have used kernel density estimation for measuring similarity between inspection data and training data. To find the probability that a point   belongs to training example  , an estimate can be computed as,
+\begin{equation}
+  1
+\end{equation}
+where h is a symmetric positive definite D × D bandwidth matrix. ‘’ denotes training example. The d-variate Gaussian function is a common choice as the kernel function K, 
+\begin{equation}
+  2
+\end{equation}
+
+The kernel function has a role in transforming the distance of   into the probability of their similarity. Then, the average probability of similarity is taken. The bandwidth h represents a generalization preference for decision. Data-driven bandwidth selection methods have been proposed, [18, 19].
+
+Proximal neighborhoods’ smoothness assumption was considered for robustness of the likelihood. [6] used joint distribution among proximal neighborhoods. [7] tried discontinuity preserving smoothing for false-alarm suppression using graph-cut assuming the morphological smoothness.
+
+Another attempt for robustness is that [7] suggested the likelihood ratio test between the background likelihood and the uniform distribution, so the likelihood values can be more stretched. [8] regarded proximal neighbors xc of x as single component and compared the component’s intensity histogram. The method showed the component consistency is more important than single pixel consistency. [9] estimated background density via variable bandwidth kernels for better data-driven estimation.
+
+The attempts to deal with positional distribution were also introduced assuming that pixel positions can be changed in dynamic background. [6] corrected small misalignments by searching best correspondents in near positions. [7] incorporated position variable with temporal variable jointly. It searched best correspondence on entire positions for handling dynamic positional change.
+
+[9] tried to combine another features into background model such as normalized color, and motion. They introduced motion information as a spatial relation parameter using optical flow assuming that intensity and optical flow features are uncorrelated. The result showed motion information is important for recognition. Consequently, the work implies that background density should be estimated based on both spatial and temporal domain.
+
+  Background Variation Modeling approaches [10, 11] have been proposed. The background’s behavior was captured by given labeled motion images. Labeled motion images   are binary and acquired after simple background subtraction. Their main assumption is that the change of the binary motion label explains background’s behavior. Therefore, [10, 11] estimate the background variation by taking expectation of the classification rate from given labeled images. In the inspection stage, two subtractions are performed. The former is the simple background subtraction and the latter is the variation subtraction. Due to the second stage, varying backgrounds are classified to normal 
+
+Shape matching algorithms define a shape as a gradient distribution with respect to space. The direct use of gradients is quite sensitive, so derivative of Gaussian (DoG) can be used in order to reduce noise effect, [13].
+\begin{equation}
+  3
+\end{equation}
+\begin{equation}
+  4
+\end{equation}
+After separable convolution, Gx and Gy are obtained. [12, 14] commonly used log-polar coordinates for robust spatial representation. By transforming the (x, y) gradients in Cartesian coordinates into (θ, d) polar coordinates, a shape of each point is determined by two parameters, angle and distance respectively. Changing polar coordinates can be computed as,
+\begin{equation}
+  5
+\end{equation}
+\begin{equation}
+  6
+\end{equation}
+
+The feature vector of the log-polar coordinates is defined as X ≡ (θ, log(|∇I|) ). The angle parameter θ indicates a shape of a point. The distance parameter log(|∇I|) captures a degree of flatness or edgeness. The log-scaled distance is used for reducing sensitiveness. Figure 3 represents Cartesian coordinates and log-polar coordinates. Note that flat regions only have small distances but they could have divergent angles among them due to the noise. In this case, the θ is meaningless, so it is desirable to set to θ = 0, if log(|∇I|) < 1. 
+
+% \begin{figure}[t]
+%   \centering
+%   \label{fig30}
+%   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig30-1}}\hfill
+%   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig30-2}}
+%   \caption{Log-polar Representation}
+% \end{figure}
+
+Shape matching algorithms find similar shapes by comparing spatial distribution among two local histograms. For measuring the spatial similarity,   test is commonly used, [14]:
+\begin{equation}
+  7
+\end{equation}
+  and   denote the K-bin normalized histogram at   and  , respectively. (7) is equivalent to the likelihood ratio test in [7, 11].
+
+
 
 \section{Spatio-Temporal Consistency}
+The suggested method considers spatial and temporal consistency jointly to estimate how much given inspection image is consistent with training examples. The spatial relation can be expressed by Shape distribution with respect to space. Also, the temporal relation can be represented by intensity distribution over time. Thus, the problem domain can be modeled in the structure of Spatio-Temporal Markov Random Field Model [1]. The proposed method is formulated based on the S-T MRF model.
+
+Figure 4 shows the relation of Spatio-Temporal neighborhood on training image set. Each parallelogram represents a training image. A point   denotes (i, j) pixel on nth training image having x intensity. Subscript indicates temporal neighborhoods of x. Temporal consistency means that an intensity of a point   on inspection image should be statistically consistent with the intensities of  . 
+
+Also,   represents spatial neighborhoods of  , such that  . Thus, the spatio-temporal consistency means that a component   should be statistically consistent with  . To avoid the curse of dimensionality, the spatial relation of   can be parameterized using gradients. Thus,   is equivalent to  . The spatio-temporal consistency can be represented by  . 
+
+\begin{figure}[t]
+  \centering
+  \label{fig40}
+  \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig40-1}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig40-2}}
+  \caption{Spatio-Temporal Neighborhood}
+\end{figure}
 
 
 \subsection{Suggested Formulation}
+The suggested approach estimates both background’s density and its variation for dynamic background subtraction. The main procedure has two stages. (See figure 4). In the training stage, a set of foreground likelihood   is estimated from given a set of positive images   using first-order background subtraction based on  . Then, the background variation model is assumed to be a uni-modal for speed and compact representation. It can be estimated simply by taking expectation of  . In the inspection stage, first-order background subtraction and second-order variation subtraction are linearly performed. By matching similarity between a foreground likelihood   and an expected likelihood  , a second-order foreground likelihood   can be estimated.
 
+\begin{figure}[t]
+  \centering
+  \label{fig50}
+  \subfigure[ ]{\includegraphics[width=0.5\textwidth]{paper-fig/fig50}}
+  \caption{Spatio-Temporal Neighborhood}
+\end{figure}
 
 
 \section{Spatio-Temporal Consistency}
 
 \subsection{First-order Spatio-Temporal Background Model}
+In order to estimating  , the feature space is defined on the S-T MRF as,
+\begin{equation}
+  8
+\end{equation}
+The first two variables are for a spatial relation that is represented by log-polar representation using (4), (5), (6), The third variable represents a temporal relation using intensity. Therefore, the S-T background model for each pixel x describes joint distribution of temporal and instant spatial relation. 
+
+A probability of normality   on S-T domain can be estimated using (1), (8). Figure 6 shows examples of S-T background density. Note that the dynamic regions are containing multi-modal density, while static regions are maintaining uni-modal density.
+
+\begin{figure}[t]
+  \centering
+  \label{fig60}
+  \subfigure[ ]{\includegraphics[width=0.5\textwidth]{paper-fig/fig60}}
+  \caption{Spatio-Temporal Background Distribution}
+\end{figure}
+
+\begin{equation}
+  9
+\end{equation}
+In MRF, a joint distribution   is proportional to a product of potential functions   over the maximal cliques  , [17]. Thus, a component probability   can be calculated using   and is containing broader spatio-temporal relation. Also, the log of the likelihood ratio test [7] is used as a potential function  . Therefore, the first-order foreground likelihood   can be calculated as,
+\begin{equation}
+  10
+\end{equation}
+\begin{equation}
+  11
+\end{equation}
+The probability of abnormality   is assumed as a uniform distribution. The C is the number of neighborhood. In experiments, 3×3 patch is used as a component  . 
+\begin{equation}
+  12
+\end{equation}
+In addition, positional distribution is considered using (12) for handling small displacement on dynamic background. In experiment, displacement within one pixel was corrected by finding best correspondence in near eight-neighbors. y is the neighborhood of x.   is calculated at y position using the feature values of x.
+
 
 \subsection{Second-order Spatio-Temporal Background Model}
+In addition, positional distribution is considered using (12) for handling small displacement on dynamic background. In experiment, displacement within one pixel was corrected by finding best correspondence in near eight-neighbors. y is the neighborhood of x.   is calculated at y position using the feature values of x.
+
+\begin{equation}
+  13
+\end{equation}
+where N is the number of  . Figure 7 shows an example of the expected likelihood descriptor. Bright regions indicate highly variant background, whereas dark regions represent static background.
+
+\begin{figure}[t]
+  \centering
+  \label{fig70}
+  \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig70-1}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig70-2}}\hfill
+  \caption{Expected Likelihood Descriptor}
+\end{figure}
+  can have negative values in static background regions due to the negative log-scaling in (10). As next matching stage requires only positive values for computation, the normalization should be performed as,
+\begin{equation}
+  14
+\end{equation}
+\begin{equation}
+  15
+\end{equation}
+
+The W and H are width and height of the image, respectively. The normalization constant Z in (15) can be computed by taking sum to one and scaling to uniform distribution with 0.5. After normalizing   using (14), E-L descriptor ensures that  . Also, other   can be normalized using Z. This normalization transforms unnormalized   to be approximately probability values;  . Some values would exceed 1, but they are unimportant to proceed to the next stage.
+
+The background variation subtraction can be performed by comparing spatial similarity between   and  . This is equivalent to shape matching process (See 2.3). Thus, the process can be performed by building local descriptors and then comparing those two descriptors using   test (7) .
+
+A local descriptor for each pixel can be built by sampling local distribution of the   into a local histogram. Local smoothness assumption for robustness and centered-focus for distinctiveness can be achieved by building Shape descriptor, [12, 14]. This can be done by center-biased sampling. Figure 8 shows an example. Each box represents a pixel on image patch. The number in each box means an index of the descriptor. The same indexed pixels are taken into a mean for the centered-focus when sampling them into their descriptor. So, 5×5 spatial distribution can be captured in the 9-bin descriptor. 
+
+\begin{figure}[t]
+  \centering
+  \label{fig80}
+  \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig80-1}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig80-2}}
+  \caption{Shape Descriptor}
+\end{figure}
+The foreground likelihood descriptor   and the expected likelihood descriptor   can be built from  ,   respectively. The similarity of    and   can be obtained using   test (7) and is called the second-order foreground likelihood  . Also, the positional displacement within one pixel neighbors is considered using (12).
+Figure 9 shows an example of variation subtraction process. (a), (b) represent   and  , respectively. (c), (f) represents  . (d), (g) indicates  . (e), (h) are  . By matching histograms between   and  ,   can be obtained. Note that normal dynamic backgrounds are successfully suppressed close to 0, while keeping foregrounds’ likelihood from being smoothed.
+
+\begin{figure}[t]
+  \centering
+  \label{fig90}
+  \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig90-a}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig90-b}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig90-c}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig90-d}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig90-e}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig90-f}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig90-g}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig90-h}}
+  \caption{Background Variation Subtraction Result}
+\end{figure}
 
 
 
 \section{Experimental Result}
+The algorithm was tested on Natural scenes with dynamic background for object recognition and SEM images with noise for defect detection. Three background models are compared: the temporal model from Elgammal [6], the first-order spatio-temporal model, and the second-order spatio-temporal model are illustrated at each column, respectively. In the first row, a positive training example  , an inspection image  , and an expected foreground likelihood   are shown, respectively.
 
+For balanced comparison, those three models used LRT test for 3×3 component   (13), and considered positional displacement within one pixel (15), and used Otsu’s thresholding (10). Our method was implemented using Matlab and run on 2.40GHz Intel Pentium Core2 Quad processor with 4 GB RAM.
 
 \subsection{Application to Object Recognition of Dynamic scenes}
+These image set contain dynamic background, and there are small transitional, rotational misalignments due to camera jitters. Figure 10–11 show the results. 
+
+Camouflage problem occurs in the temporal model shown in the first column. The foregrounds having similar intensity to their background were missed. The discrimination is enhanced in the first-order spatio-temporal model in the second column, whereas false-alarms increased. After variation subtraction in the third column, the dynamic backgrounds are successfully suppressed. Also, thanks to the stable response of  , the global threshold T chosen from Otsu’s method was working well. Those results show our method is distinctive and robust in dynamic background constraints.
+
+\begin{figure}[t]
+  \centering
+  \label{fig100}
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-1}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-2}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-3}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-4}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-5}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-6}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-7}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-8}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-9}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-10}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-11}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-12}}
+  \caption{Object Recognition on natural scenes. The second row shows foreground likelihoods. The third row shows thresholding images. Those are 194×150 sized images. 32 positive images were used for training. 3 negative images were used for training threshold}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \label{fig110}
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-1}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-2}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-3}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-4}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-5}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-6}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-7}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-8}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-9}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-10}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-11}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-12}}
+  \caption{Object Recognition on natural scenes. The second row shows foreground likelihoods. The third row shows thresholding images. There are a moving car and walking people behind the tree. Those are 191×148 sized images. 50 positive images were used for training. 3 negative images were used for training threshold}
+\end{figure}
 
 \subsection{Application to Defect Detection of Highly Noised SEM images}
+These image set contains dynamic textures, and small transitional misalignments. In addition, those are highly noised. Figure 12–13 show the results. 
+
+In figure 12, T-model missed defects having similar colors, which shows it is dull to shape change. The first-order S-T model detected not only shape change, but also more false-alarms, which means it is vulnerable to noise. However, the false-positives are suppressed in the second-order S-T model. In figure 13, due to the significant noise, T-model and first order S-T model failed to correct localizing defects, whereas our second-order S-T model successfully suppressed noises and detected correctly.
+
+A decision of defect image is crucial in defect detection. Thus, the classification rate has been used for performance evaluation. Table 3 shows the classification rate of the defect detection in SEM images. Note that false positives are significantly decreased.
+
+\begin{table}[t]
+  \centering
+  \label{tab10}
+  \caption{Classification rate for defect detection}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \label{fig120}
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-1}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-2}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-3}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-4}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-5}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-6}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-7}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-8}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-9}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-10}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-11}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-12}}
+  \caption{Defect Detection on SEM images. The second row shows foreground likelihoods. The third row shows thresholding images. Those are 111×111 sized images. 33 positive images were used for training. 3 negative images were used for training threshold.}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \label{fig130}
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-1}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-2}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-3}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-4}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-5}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-6}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-7}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-8}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-9}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-10}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-11}}\hfill
+  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-12}}
+  \caption{Defect Detection on SEM images. The second row shows foreground likelihoods. The third row shows thresholding images. Those are 110×109 sized images. 22 positive images were used for training. 3 negative images were used for training threshold.}
+\end{figure}
 
 
 

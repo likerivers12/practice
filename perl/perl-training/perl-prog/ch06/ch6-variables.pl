@@ -84,3 +84,17 @@ my @months = qw(January February March April May June July August September Octo
 ### Hashes
 ###-----------------------------
 ### p34
+
+#my %monthdays = ("January", 31, "February", 28, "March", 31);
+my %monthdays = (
+    "January" => 31, 
+    "February" => 28, 
+    "March" => 31
+);
+
+
+###-----------------------------
+### Special variables
+###-----------------------------
+### p38
+
