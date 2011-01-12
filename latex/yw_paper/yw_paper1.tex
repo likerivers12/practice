@@ -229,8 +229,20 @@ A local descriptor for each pixel can be built by sampling local distribution of
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig80-2}}
   \caption{Shape Descriptor}
 \end{figure}
-The foreground likelihood descriptor   and the expected likelihood descriptor   can be built from  ,   respectively. The similarity of    and   can be obtained using   test (7) and is called the second-order foreground likelihood  . Also, the positional displacement within one pixel neighbors is considered using (12).
-Figure 9 shows an example of variation subtraction process. (a), (b) represent   and  , respectively. (c), (f) represents  . (d), (g) indicates  . (e), (h) are  . By matching histograms between   and  ,   can be obtained. Note that normal dynamic backgrounds are successfully suppressed close to 0, while keeping foregrounds’ likelihood from being smoothed.
+%The foreground likelihood descriptor   and the expected likelihood descriptor   can be built from  ,   respectively. The similarity of    and   can be obtained using   test (7) and is called the second-order foreground likelihood  . Also, the positional displacement within one pixel neighbors is considered using (12).
+%Figure 9 shows an example of variation subtraction process. (a), (b) represent   and  , respectively. (c), (f) represents  . (d), (g) indicates  . (e), (h) are  . By matching histograms between   and  ,   can be obtained. Note that normal dynamic backgrounds are successfully suppressed close to 0, while keeping foregrounds’ likelihood from being smoothed.
+The foreground likelihood descriptor \begin{math} h_L(x) \end{math} and the expected likelihood descriptor
+\begin{math} h_b(\hat{x}) \end{math} can be built from \begin{math} L(x), E(L(\hat{x})) \end{math} respectively.
+The similarity of \begin{math} h_L(x) \end{math}  and \begin{math} h_b(\hat{x}) \end{math} can be obtained using 
+\begin{math} \chi ^2 \end{math} test ( 7 ) and is called the second-order foreground likelihood \begin{math} L^2(x) \end{math}.
+Also, the positional displacement within one pixel neighbors is considered using ( 12 ).
+
+\ref{fig90} shows an example of variation subtraction process. (a), (b) represent \begin{math} E(\hat{L}) \end{math}.
+(d), (g) indicates \begin{math} L \end{math}. (e), (h) are \begin{math} L^2 \end{math}.
+By matching histograms between \begin{math} E(\hat{L}) \end{math} and \begin{math} L, L^2 \end{math} can be obtained.
+Note that normal dynamic backgrounds are successfully suppressed close to 0, while keeping foregrounds' likelihood from being smoothed.
+
+
 
 \begin{figure}[t]
   \centering
@@ -347,20 +359,21 @@ A decision of defect image is crucial in defect detection. Thus, the classificat
 
 \section{Discussion}
 
+The dynamic background constraints demand distinctiveness and robustness of the background model: camouflage problem and dynamic background problem. Therefore, we extended the background model by assuming S-T MRF for overcoming those problems: the spatio-temporal consistency in the first-order space for distinctiveness and variation consistency in the second-order space for robustness. We showed the distinctiveness and robustness in the applications of the object recognition of dynamic scenes and defect detection in highly noised SEM images.
+The suggested model can be easily applied to video case by updating expected likelihood descriptor   as,
+\begin{equation}
+  16
+\end{equation}
+
+where α is a learning rate. 
+The suggested method has the same limitation as other background subtraction methods. Kernel density estimation requires considerable computation for inspection as it is a kind of instance based learning. The main reason of the use of the instance based learning results from the high dimensionality of the feature space for description of the background density. However, defect detection on SEM images and object recognition on video requires real-time solution for detection, so eager learning is more desirable. Also, a study of illumination or rotation change is needed for more robustness of the background model.
 
 
 
 
-The foreground likelihood descriptor \begin{math} h_L(x) \end{math} and the expected likelihood descriptor
-\begin{math} h_b(\hat{x}) \end{math} can be built from \begin{math} L(x), E(L(\hat{x})) \end{math} respectively.
-The similarity of \begin{math} h_L(x) \end{math}  and \begin{math} h_b(\hat{x}) \end{math} can be obtained using 
-\begin{math} \chi ^2 \end{math} test ( 7 ) and is called the second-order foreground likelihood \begin{math} L^2(x) \end{math}.
-Also, the positional displacement within one pixel neighbors is considered using ( 12 ).
 
-\ref{fig90} shows an example of variation subtraction process. (a), (b) represent \begin{math} E(\hat{L}) \end{math}.
-(d), (g) indicates \begin{math} L \end{math}. (e), (h) are \begin{math} L^2 \end{math}.
-By matching histograms between \begin{math} E(\hat{L}) \end{math} and \begin{math} L, L^2 \end{math} can be obtained.
-Note that normal dynamic backgrounds are successfully suppressed close to 0, while keeping foregrounds' likelihood from being smoothed.
+
+
 
 
 
@@ -371,6 +384,48 @@ Note that normal dynamic backgrounds are successfully suppressed close to 0, whi
 
 \bibliographystyle{ams[lain}
 \bibliography{test}
+
+
+
+
+
+[1] S. Kamijo, K. Ikeuchi, and M. Sakauchi. Segmentations of spatio- temporal images by spatio-temporal Markov random field model. Proc. EMMCVPR Workshop, pp. 298-313, 2001.
+
+[2] M. Piccardi. Background subtraction techniques: a review. In Proc. IEEE Int. Conf. Systems, Man, Cybernetics, pp. 3099–3104, 2004.
+
+[3] C. Wren, A. Azarbayejani, T. Darrel, and A. Pentland. Pfinder: Real time tracking of the human body. In IEEE Transactions on Pattern Analysis and Machine Intelligence, 1997.
+
+[4] R. Cucchiara, C. Grana, M. Piccardi, and A. Prati. Detecting moving objects, ghosts, and shadows in video streams. IEEE Trans. on Pattern Anal. and Machine Intell., vol. 25, no. 10, pp. 1337-1442, 2003.
+
+[5] C. Stauffer and W.E.L. Grimson. Adaptive background mixture models for real-time tracking. Proc. IEEE CVPR, pp. 246-252, 1999.
+
+[6] A. Elgammal, D. Harwood, and L. Davis. Non-parametric Model for Background Subtraction. Proc. European Conf. Computer Vision, vol. 2, pp. 751-767, June 2000.
+
+[7] Y. Sheikh, M. Shah. Bayesian modelling of dynamic scenes for object detection. IEEE Transactions on Pattern Analysis and Machine Intelligence. 27 (11) pp. 1778–1792, 2005.
+
+[8] T. Ko, S. Soatto, and D. Estrin. Background subtraction on distributions. In ECCV, volume 3, pp 276–289, 2008.
+
+[9] A. Mittal, and N. Paragios. Motion-based background subtraction using adaptive kernel density estimation. In IEEE Proceedings on Computer Vision and Pattern Recognition, 2004.
+
+[10] P.-M. Jodoin, J.Konrad, and V. Saligrama. Modeling background activity for behavior subtraction. In proc. of IEEE ICDSC, 2008.
+
+[11] Y. Bebezeth, P.-M. Jodoin, V. Saligrama, C. Rosenberger, Abnormal events detection based on spatio-temporal co-occurences. In IEEE Proceedings on Computer Vision and Pattern Recognition, pp. 2458–2465, 2009.
+
+[12] K. Mikolajczyk, and C. Schmid. A performance evaluation of local descriptors. In Proceedings of the Conference on Computer Vision and Pattern Recognition, pp. 257–264, 2003.
+
+[13] D. Lowe. Distinctive image features from scale-invariant keypoints. International Journal of Computer Vision, 2(60):91.110, 2004.
+
+[14] S. Belongie, J. Malik, and J. Puzicha. Shape matching and object recognition using shape contexts. IEEE Transactions on Pattern Analysis and Machine Intelligence, 24(4):509.522, 2002.
+
+[15] M. Sezgin, B. Sankur. Survey over image thresholding techniques and quantitative performance evaluation. Journal of Electronic Imaging, vol. 13, no. 1, pp. 146–165, 2004.
+
+[16] N. Otsu. A threshold selection method from gray level histograms. IEEE Trans. Syst. Man Cybern. SMC-9, pp. 62–66, 1979.
+
+[17] C. M. Bishop. Pattern Recognition and Machine Learning. Springer, August 2006.
+
+[18] M. C. Jones, J. S. Marron, and S. J. Sheather. A Brief Survey of Bandwidth Selection for Density Estimation. Journal of the American Statistical Association, Vol. 91, No. 433, 401-407, 1996.
+
+[19] D. Comaniciu, V. Ramesh, and P. Meer. The Variable Bandwidth Mean Shift and Data-Driven Scale Selection. Proc Eighth International Conference of Computer Vision, vol. I, pp. 438-445, 2001
 
 
 
