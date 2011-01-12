@@ -1,31 +1,35 @@
 
-\documentclass[a4paper,twocolumn, 10pt]{article}
+%\documentclass[a4paper,twocolumn, 10pt]{article}
+\documentclass[conference]{IEEEtran}
+
 
 %%% 그림 관련
 \usepackage[dvips]{graphicx}
 \usepackage{subfigure}
 
+\begin{document}
 
 \title{Abnormal Object Detection Using Second-Order Spatio-Temporal Background Model}
 \author{Suil Son, Young-Woon Cha, and Suk I. Yoo}
 
-
-\begin{document}
-
 \maketitle
 
 \begin{abstract}
-\emph{
-This paper presents the robust background subtraction method in dynamic background constraints. 
-One problem of other methods is that as they used color-based density estimation, they could suffer from the so-called camouflage problem. This typically occurs when the color is similar to its background even when its shape is sharply different. Thus, shape features should be combined to the background model.
-Moreover, since dynamic backgrounds are varying frequently, other first-order background subtraction methods gives unwanted false-alarms in those images due to the variance of the background. Thus, the background model should be extended to include nonstaionary background as normal. 
-This paper suggests the spatio-temporal background model by introducing shape features and demonstrates significant improvements in detection. This paper also proposes the variation subtraction method by extending background model into the second-order space. After variation subtraction, the stable response on dynamic background images facilitates reliable thresholding for abnormality decision. 
-The proposed method was tested on Natural scenes with dynamic background for object recognition and Semi-conductor wafer SEM (Scanning electron microscope) images with noise for defect detection. Experiments show that our algorithm enhanced the discrimination and successfully suppressed false-alarms from dynamic background.
-}
+This paper presents the robust background subtraction method in dynamic background constraints.
 
-Keywords:  background subtraction, defect detection, foreground detection, object recognition, shape matching
+One problem of other methods is that as they used color-based density estimation, they could suffer from the so-called camouflage problem. This typically occurs when the color is similar to its background even when its shape is sharply different. Thus, shape features should be combined to the background model.
+
+Moreover, since dynamic backgrounds are varying frequently, other first-order background subtraction methods gives unwanted false-alarms in those images due to the variance of the background. Thus, the background model should be extended to include nonstaionary background as normal.
+
+This paper suggests the spatio-temporal background model by introducing shape features and demonstrates significant improvements in detection. This paper also proposes the variation subtraction method by extending background model into the second-order space. After variation subtraction, the stable response on dynamic background images facilitates reliable thresholding for abnormality decision.
+
+The proposed method was tested on Natural scenes with dynamic background for object recognition and Semi-conductor wafer SEM (Scanning electron microscope) images with noise for defect detection. Experiments show that our algorithm enhanced the discrimination and successfully suppressed false-alarms from dynamic background.
+
+\textbf{Keywords}: background subtraction, defect detection, foreground detection, object recognition, shape matching
 
 \end{abstract}
+
+\IEEEpeerreviewmaketitle
 
 
 \section{Introduction}
@@ -37,11 +41,11 @@ The main goal of the visual surveillance in computer vision is to classify abnor
  
   Dynamic background constraints are natural conditions in object recognition and defect detection. The dynamic images appear where natural scenes with nonstationary objects such as swaying trees, fountains, moving cars and people. Dynamic background images also include misalignment images captured by hand-held cameras and include noised images – highly zoomed-in images, and dynamic textured images. Semi-conductor wafer SEM (Scanning electron microscope) images are one example. Even after alignments of those dynamic background images, small misalignments remain due to the variance of the background. Other methods mostly conducted their experiments on video, but the suggested method regards the input as a set of independent images with respect to time for applying to general applications. 
       
-Some problems, however, occur when using the first-order color-based background subtraction methods to deal with the dynamic background images. The color-based background models could suffer from the so-called camouflage problem. (See figure 1). False-negatives occur when its color is similar to its background even when their shapes are sharply different. Thus, shape features should be combined into the background model. 
+Some problems, however, occur when using the first-order color-based background subtraction methods to deal with the dynamic background images. The color-based background models could suffer from the so-called camouflage problem. (See figure \ref{fig:10}). False-negatives occur when its color is similar to its background even when their shapes are sharply different. Thus, shape features should be combined into the background model. 
 
 \begin{figure}[t]
   \centering
-  \label{fig10}
+  \label{fig:10}
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig10-1}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig10-2}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig10-3}}
@@ -50,7 +54,7 @@ Some problems, however, occur when using the first-order color-based background 
 
 \begin{figure}[t]
   \centering
-  \label{fig20}
+  \label{fig:20}
 %  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig20-1}}\hfill
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig20-2}}\hfill
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig20-3}}
@@ -58,7 +62,7 @@ Some problems, however, occur when using the first-order color-based background 
 \end{figure}
 
 
-Moreover, as dynamic backgrounds are varying frequently, the stationary background model based approaches generate many false-positives in those images due to the imbalance among each background density. (See figure 2). Thus, the background model should be extended to include nonstaionary backgrounds as normal. 
+Moreover, as dynamic backgrounds are varying frequently, the stationary background model based approaches generate many false-positives in those images due to the imbalance among each background density. (See figure \ref{fig:20}). Thus, the background model should be extended to include nonstaionary backgrounds as normal. 
 This paper presents the robust background model for containing dynamic backgrounds. In Section 2, the previous works and background works for the proposed method are discussed. 
 
 The proposed work has two novel contributions: Firstly, the background is modeled on the shape-intensity joint domain, so it can estimate shape and intensity change simultaneously and improves discrimination compared to other intensity-based background models. Secondly, since background dynamics can be explained in the second-order space, we suggest the second-order background model for removing background’s variation. The suggested variation subtraction method generates stable response on dynamic background images and thus the threshold selection methods can be reliably applied to this model. In Section 3, 4, the suggested formulation and detailed algorithm is presented.
@@ -69,59 +73,61 @@ This method was tested on Natural scenes with dynamic background for object reco
 
 \section{Related Work}
 
-Background subtraction approaches can be categorized by their feature space. The first background subtraction methods [2, 3, 4] suggested statistical methods based on temporal consistency by assuming the single background modal. Single Gaussian [3] or median [4] was used for modeling background. Then, the mixture of Gaussians [5] was introduced for extending background model to the multi-modal. 
+Background subtraction approaches can be categorized by their feature space. The first background subtraction methods \cite{Piccardi, Wren, Cucchiara} suggested statistical methods based on temporal consistency by assuming the single background modal. Single Gaussian \cite{Wren} or median \cite{Chucchiara} was used for modeling background. Then, the mixture of Gaussians \cite{Stauffer} was introduced for extending background model to the multi-modal. 
 
-Non-parametric background model using kernel density estimation [6] was introduced. The rest of the background subtraction algorithms also have used kernel density estimation for measuring similarity between inspection data and training data. To find the probability that a point   belongs to training example  , an estimate can be computed as,
-\begin{equation}
-  1
+Non-parametric background model using kernel density estimation \cite{Elgammal} was introduced. The rest of the background subtraction algorithms also have used kernel density estimation for measuring similarity between inspection data and training data. To find the probability that a point \begin{math} x \end{math}  belongs to training example \begin{math} \hat{x} \end{math} , an estimate can be computed as,
+\begin{equation}\label{eq:10}
+  P_N( \mathbf{x} ) = \frac{1}{n} \sum_{j=1}^N \frac{1}{h^D}K \Big( \frac{ \mathbf{x} - \hat{\mathbf{x}}_j } {h} \Big)
 \end{equation}
-where h is a symmetric positive definite D × D bandwidth matrix. ‘’ denotes training example. The d-variate Gaussian function is a common choice as the kernel function K, 
-\begin{equation}
-  2
+where \begin{math} h \end{math} is a symmetric positive definite \begin{math} D \times D \end{math} bandwidth matrix. ` \begin{math} \hat{} \end{math} ' denotes training example. The d-variate Gaussian function is a common choice as the kernel function \begin{math} K \end{math}, 
+\begin{equation}\label{eq:20}
+  p( \mathbf{x} ) = \frac{1}{N} \sum_{j=1}^N (2\pi)^{-D/2} |\mathbf{H}|^{-1/2}
+                    exp \Big( -\frac{1}{2} (\mathbf{x} - \hat{\mathbf{x}}_j)^T |\mathbf{H}|^{-1}  (\mathbf{x} - \hat{\mathbf{x}}_j ) \Big) 
 \end{equation}
 
-The kernel function has a role in transforming the distance of   into the probability of their similarity. Then, the average probability of similarity is taken. The bandwidth h represents a generalization preference for decision. Data-driven bandwidth selection methods have been proposed, [18, 19].
+The kernel function has a role in transforming the distance of \begin{math} (x , \hat{x}_j) \end{math}  into the probability of their similarity. Then, the average probability of similarity is taken. The bandwidth \begin{math} h \end{math} represents a generalization preference for decision. Data-driven bandwidth selection methods have been proposed, \cite{Jones, Comaniciu}.
 
-Proximal neighborhoods’ smoothness assumption was considered for robustness of the likelihood. [6] used joint distribution among proximal neighborhoods. [7] tried discontinuity preserving smoothing for false-alarm suppression using graph-cut assuming the morphological smoothness.
+Proximal neighborhoods' smoothness assumption was considered for robustness of the likelihood. \cite{Elgammal} used joint distribution among proximal neighborhoods. \cite{Sheikh} tried discontinuity preserving smoothing for false-alarm suppression using graph-cut assuming the morphological smoothness.
 
-Another attempt for robustness is that [7] suggested the likelihood ratio test between the background likelihood and the uniform distribution, so the likelihood values can be more stretched. [8] regarded proximal neighbors xc of x as single component and compared the component’s intensity histogram. The method showed the component consistency is more important than single pixel consistency. [9] estimated background density via variable bandwidth kernels for better data-driven estimation.
+Another attempt for robustness is that \cite{Sheikh} suggested the likelihood ratio test between the background likelihood and the uniform distribution, so the likelihood values can be more stretched. \cite{Ko} regarded proximal neighbors \begin{math} x^C \end{math} of \begin{math} x \end{math} as single component and compared the component's intensity histogram. The method showed the component consistency is more important than single pixel consistency. \cite{Mittal} estimated background density via variable bandwidth kernels for better data-driven estimation.
 
-The attempts to deal with positional distribution were also introduced assuming that pixel positions can be changed in dynamic background. [6] corrected small misalignments by searching best correspondents in near positions. [7] incorporated position variable with temporal variable jointly. It searched best correspondence on entire positions for handling dynamic positional change.
+The attempts to deal with positional distribution were also introduced assuming that pixel positions can be changed in dynamic background. \cite{Elgammal} corrected small misalignments by searching best correspondents in near positions. \cite{Sheikh} incorporated position variable with temporal variable jointly. It searched best correspondence on entire positions for handling dynamic positional change.
 
-[9] tried to combine another features into background model such as normalized color, and motion. They introduced motion information as a spatial relation parameter using optical flow assuming that intensity and optical flow features are uncorrelated. The result showed motion information is important for recognition. Consequently, the work implies that background density should be estimated based on both spatial and temporal domain.
+\cite{Mittal} tried to combine another features into background model such as normalized color, and motion. They introduced motion information as a spatial relation parameter using optical flow assuming that intensity and optical flow features are uncorrelated. The result showed motion information is important for recognition. Consequently, the work implies that background density should be estimated based on both spatial and temporal domain.
 
-  Background Variation Modeling approaches [10, 11] have been proposed. The background’s behavior was captured by given labeled motion images. Labeled motion images   are binary and acquired after simple background subtraction. Their main assumption is that the change of the binary motion label explains background’s behavior. Therefore, [10, 11] estimate the background variation by taking expectation of the classification rate from given labeled images. In the inspection stage, two subtractions are performed. The former is the simple background subtraction and the latter is the variation subtraction. Due to the second stage, varying backgrounds are classified to normal 
+  Background Variation Modeling approaches \cite{Jodoin, Bebezeth} have been proposed. The background’s behavior was captured by given labeled motion images. Labeled motion images \begin{math} L(x) \in \{0, 1\} \end{math}  are binary and acquired after simple background subtraction. Their main assumption is that the change of the binary motion label explains background's behavior. Therefore, \cite{Jodoin, Bebezeth} estimate the background variation by taking expectation of the classification rate from given labeled images. In the inspection stage, two subtractions are performed. The former is the simple background subtraction and the latter is the variation subtraction. Due to the second stage, varying backgrounds are classified to normal 
 
 Shape matching algorithms define a shape as a gradient distribution with respect to space. The direct use of gradients is quite sensitive, so derivative of Gaussian (DoG) can be used in order to reduce noise effect, [13].
-\begin{equation}
-  3
+\begin{equation}\label{eq:30}
+  \frac{d}{dx}(G*I) = \Big( \frac{d}{dx}G \Big) * I
 \end{equation}
-\begin{equation}
-  4
+\begin{equation}\label{eq:40}
+  G^{\prime}(x) = - \frac{x}{ \sigma ^2} e^{ - \frac{x^2}{2\sigma ^2}}
 \end{equation}
-After separable convolution, Gx and Gy are obtained. [12, 14] commonly used log-polar coordinates for robust spatial representation. By transforming the (x, y) gradients in Cartesian coordinates into (θ, d) polar coordinates, a shape of each point is determined by two parameters, angle and distance respectively. Changing polar coordinates can be computed as,
-\begin{equation}
-  5
+After separable convolution, \begin{math} G_x \end{math} and \begin{math} G_y \end{math} are obtained. \cite{Mikolajczyk, Belongie} commonly used log-polar coordinates for robust spatial representation. By transforming the \begin{math} (x, y) \end{math} gradients in Cartesian coordinates into \begin{math} (\theta, d) \end{math} polar coordinates, a shape of each point is determined by two parameters, angle and distance respectively. Changing polar coordinates can be computed as,
+\begin{equation}\label{eq:50}
+  \theta = \textrm{tan}^{-1} \Big( \frac{I_y}{I_x} \Big)
 \end{equation}
-\begin{equation}
-  6
+\begin{equation}\label{eq:60}
+  |\nabla I| = \sqrt{I_x^2 + I_y^2 }
 \end{equation}
 
-The feature vector of the log-polar coordinates is defined as X ≡ (θ, log(|∇I|) ). The angle parameter θ indicates a shape of a point. The distance parameter log(|∇I|) captures a degree of flatness or edgeness. The log-scaled distance is used for reducing sensitiveness. Figure 3 represents Cartesian coordinates and log-polar coordinates. Note that flat regions only have small distances but they could have divergent angles among them due to the noise. In this case, the θ is meaningless, so it is desirable to set to θ = 0, if log(|∇I|) < 1. 
+The feature vector of the log-polar coordinates is defined as \begin{math} X \equiv ( \theta, log(|\nabla I|) ) \end{math}. The angle parameter \begin{math} \theta \end{math} indicates a shape of a point. The distance parameter \begin{math} log(|\nabla I|) \end{math} captures a degree of flatness or edgeness. The log-scaled distance is used for reducing sensitiveness. Figure \ref{fig:30} represents Cartesian coordinates and log-polar coordinates. Note that flat regions only have small distances but they could have divergent angles among them due to the noise. In this case, the \begin{math} \theta \end{math} is meaningless, so it is desirable to set to \begin{math} \theta = 0 \end{math}, if \begin{math} log(|\nabla I|) < 1 \end{math}. 
 
-% \begin{figure}[t]
-%   \centering
-%   \label{fig30}
-%   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig30-1}}\hfill
-%   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig30-2}}
-%   \caption{Log-polar Representation}
-% \end{figure}
+\begin{figure}[!t]
+  \centering
+  \label{fig:30}
+%  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig30-1}}\hfill
+%  \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig30-2}}
+  \caption{Log-polar Representation}
+\end{figure}
 
-Shape matching algorithms find similar shapes by comparing spatial distribution among two local histograms. For measuring the spatial similarity,   test is commonly used, [14]:
-\begin{equation}
-  7
+Shape matching algorithms find similar shapes by comparing spatial distribution among two local histograms. For measuring the spatial similarity, \begin{math} \chi ^2 \end{math} test is commonly used, \cite{Belongie}:
+\begin{equation}\label{eq:70}
+  C_{ij} \equiv C( p_i, q_j ) = \frac{1}{2} \sum_{k=1}^K 
+                              \frac{[h_i(k) - h_j(k) ] ^2}{h_i(k) + h_j(k) }
 \end{equation}
-  and   denote the K-bin normalized histogram at   and  , respectively. (7) is equivalent to the likelihood ratio test in [7, 11].
+\begin{math} h_i(k) \end{math} and \begin{math} h_j(k) \end{math}  denote the \begin{math} K \end{math}-bin normalized histogram at \begin{math} p_i \end{math} and \begin{math} p_j \end{math}, respectively. (7) is equivalent to the likelihood ratio test in \cite{Sheikh, Bebezeth}.
 
 
 
@@ -134,7 +140,7 @@ Also,   represents spatial neighborhoods of  , such that  . Thus, the spatio-tem
 
 \begin{figure}[t]
   \centering
-  \label{fig40}
+  \label{fig:40}
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig40-1}}\hfill
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig40-2}}
   \caption{Spatio-Temporal Neighborhood}
@@ -146,7 +152,7 @@ The suggested approach estimates both background’s density and its variation f
 
 \begin{figure}[t]
   \centering
-  \label{fig50}
+  \label{fig:50}
   \subfigure[ ]{\includegraphics[width=0.5\textwidth]{paper-fig/fig50}}
   \caption{Spatio-Temporal Neighborhood}
 \end{figure}
@@ -165,7 +171,7 @@ A probability of normality   on S-T domain can be estimated using (1), (8). Figu
 
 \begin{figure}[t]
   \centering
-  \label{fig60}
+  \label{fig:60}
   \subfigure[ ]{\includegraphics[width=0.5\textwidth]{paper-fig/fig60}}
   \caption{Spatio-Temporal Background Distribution}
 \end{figure}
@@ -197,7 +203,7 @@ where N is the number of  . Figure 7 shows an example of the expected likelihood
 
 \begin{figure}[t]
   \centering
-  \label{fig70}
+  \label{fig:70}
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig70-1}}\hfill
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig70-2}}\hfill
   \caption{Expected Likelihood Descriptor}
@@ -218,7 +224,7 @@ A local descriptor for each pixel can be built by sampling local distribution of
 
 \begin{figure}[t]
   \centering
-  \label{fig80}
+  \label{fig:80}
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig80-1}}\hfill
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig80-2}}
   \caption{Shape Descriptor}
@@ -231,7 +237,7 @@ The similarity of \begin{math} h_L(x) \end{math}  and \begin{math} h_b(\hat{x}) 
 \begin{math} \chi ^2 \end{math} test ( 7 ) and is called the second-order foreground likelihood \begin{math} L^2(x) \end{math}.
 Also, the positional displacement within one pixel neighbors is considered using ( 12 ).
 
-\ref{fig90} shows an example of variation subtraction process. (a), (b) represent \begin{math} E(\hat{L}) \end{math}.
+\ref{fig:90} shows an example of variation subtraction process. (a), (b) represent \begin{math} E(\hat{L}) \end{math}.
 (d), (g) indicates \begin{math} L \end{math}. (e), (h) are \begin{math} L^2 \end{math}.
 By matching histograms between \begin{math} E(\hat{L}) \end{math} and \begin{math} L, L^2 \end{math} can be obtained.
 Note that normal dynamic backgrounds are successfully suppressed close to 0, while keeping foregrounds' likelihood from being smoothed.
@@ -240,7 +246,7 @@ Note that normal dynamic backgrounds are successfully suppressed close to 0, whi
 
 \begin{figure}[t]
   \centering
-  \label{fig90}
+  \label{fig:90}
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig90-a}}\hfill
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig90-b}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig90-c}}\hfill
@@ -266,7 +272,7 @@ Camouflage problem occurs in the temporal model shown in the first column. The f
 
 \begin{figure}[t]
   \centering
-  \label{fig100}
+  \label{fig:100}
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-1}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-2}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig100-3}}\hfill
@@ -284,7 +290,7 @@ Camouflage problem occurs in the temporal model shown in the first column. The f
 
 \begin{figure}[t]
   \centering
-  \label{fig110}
+  \label{fig:110}
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-1}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-2}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig110-3}}\hfill
@@ -309,13 +315,13 @@ A decision of defect image is crucial in defect detection. Thus, the classificat
 
 \begin{table}[t]
   \centering
-  \label{tab10}
+  \label{tab:10}
   \caption{Classification rate for defect detection}
 \end{table}
 
 \begin{figure}[t]
   \centering
-  \label{fig120}
+  \label{fig:120}
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-1}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-2}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig120-3}}\hfill
@@ -333,7 +339,7 @@ A decision of defect image is crucial in defect detection. Thus, the classificat
 
 \begin{figure}[t]
   \centering
-  \label{fig130}
+  \label{fig:130}
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-1}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-2}}\hfill
   \subfigure[ ]{\includegraphics[width=0.15\textwidth]{paper-fig/fig130-3}}\hfill
@@ -351,7 +357,7 @@ A decision of defect image is crucial in defect detection. Thus, the classificat
 
 
 
-\section{Discussion}
+\section{Conclusion}
 
 The dynamic background constraints demand distinctiveness and robustness of the background model: camouflage problem and dynamic background problem. Therefore, we extended the background model by assuming S-T MRF for overcoming those problems: the spatio-temporal consistency in the first-order space for distinctiveness and variation consistency in the second-order space for robustness. We showed the distinctiveness and robustness in the applications of the object recognition of dynamic scenes and defect detection in highly noised SEM images.
 The suggested model can be easily applied to video case by updating expected likelihood descriptor   as,
@@ -362,17 +368,15 @@ The suggested model can be easily applied to video case by updating expected lik
 where α is a learning rate. 
 The suggested method has the same limitation as other background subtraction methods. Kernel density estimation requires considerable computation for inspection as it is a kind of instance based learning. The main reason of the use of the instance based learning results from the high dimensionality of the feature space for description of the background density. However, defect detection on SEM images and object recognition on video requires real-time solution for detection, so eager learning is more desirable. Also, a study of illumination or rotation change is needed for more robustness of the background model.
 
+\section*{Acknowledgement}
 
 
 
 
 
 
-
-
-
-
-
+% \bibliographystyle{IEEEtran}
+% \bibliograph{IEEEabrv,yw_paper1}
 
 
 
