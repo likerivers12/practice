@@ -147,7 +147,7 @@ Also, \begin{math} \hat{x}_i^C \end{math} represents spatial neighborhoods of \b
 
 
 \subsection{Suggested Formulation}
-The suggested approach estimates both background’s density and its variation for dynamic background subtraction. The main procedure has two stages. (See figure 4). In the training stage, a set of foreground likelihood   is estimated from given a set of positive images   using first-order background subtraction based on  . Then, the background variation model is assumed to be a uni-modal for speed and compact representation. It can be estimated simply by taking expectation of  . In the inspection stage, first-order background subtraction and second-order variation subtraction are linearly performed. By matching similarity between a foreground likelihood   and an expected likelihood  , a second-order foreground likelihood   can be estimated.
+The suggested approach estimates both background's density and its variation for dynamic background subtraction. The main procedure has two stages. (See \ref{fig:40}. In the training stage, a set of foreground likelihood \begin{math} \hat{L}_i \end{math} is estimated from given a set of positive images \begin{math} \hat{I}^+ \end{math}  using first-order background subtraction based on \begin{math} P(Shape, Intensity) \end{math} . Then, the background variation model is assumed to be a uni-modal for speed and compact representation. It can be estimated simply by taking expectation of \begin{math} \hat{L}_i \end{math} . In the inspection stage, first-order background subtraction and second-order variation subtraction are linearly performed. By matching similarity between a foreground likelihood \begin{math} E(\hat{L}) \end{math}  and an expected likelihood \begin{math} \hat{L}^2 \end{math} , a second-order foreground likelihood   can be estimated.
 
 \begin{figure}[!t]
   \centering
@@ -160,13 +160,13 @@ The suggested approach estimates both background’s density and its variation f
 \section{Spatio-Temporal Consistency}
 
 \subsection{First-order Spatio-Temporal Background Model}
-In order to estimating  , the feature space is defined on the S-T MRF as,
-\begin{equation}
-  8
+In order to estimating \begin{math} P(spatial, temporal) \end{math} , the feature space is defined on the S-T MRF as,
+\begin{equation}\label{eq:80}
+  \mathbf{x} \equiv (\theta, log(|\nabla I|), I)
 \end{equation}
-The first two variables are for a spatial relation that is represented by log-polar representation using (4), (5), (6), The third variable represents a temporal relation using intensity. Therefore, the S-T background model for each pixel x describes joint distribution of temporal and instant spatial relation. 
+The first two variables are for a spatial relation that is represented by log-polar representation using \ref{eq:40, eq:50, eq:60}, The third variable represents a temporal relation using intensity. Therefore, the S-T background model for each pixel x describes joint distribution of temporal and instant spatial relation. 
 
-A probability of normality   on S-T domain can be estimated using (1), (8). Figure 6 shows examples of S-T background density. Note that the dynamic regions are containing multi-modal density, while static regions are maintaining uni-modal density.
+A probability of normality \begin{math} P_N(\mathbf{x} \end{math}  on S-T domain can be estimated using \ref{eq:10, eq:80}. Figure \ref{fig:60} shows examples of S-T background density. Note that the dynamic regions are containing multi-modal density, while static regions are maintaining uni-modal density.
 
 \begin{figure}[!t]
   \centering
@@ -175,30 +175,31 @@ A probability of normality   on S-T domain can be estimated using (1), (8). Figu
   \caption{Spatio-Temporal Background Distribution}
 \end{figure}
 
-\begin{equation}
-  9
+\begin{equation}\label{eq:90}
+  P(x^c) \propto \prod_{k \in x^C} \psi ^k (k)
 \end{equation}
-In MRF, a joint distribution   is proportional to a product of potential functions   over the maximal cliques  , [17]. Thus, a component probability   can be calculated using   and is containing broader spatio-temporal relation. Also, the log of the likelihood ratio test [7] is used as a potential function  . Therefore, the first-order foreground likelihood   can be calculated as,
-\begin{equation}
-  10
+In MRF, a joint distribution \begin{math} P(x^C) \end{math}  is proportional to a product of potential functions \begin{math} \psi^k(k) \end{math}  over the maximal cliques \begin{math} P_N(\mathbf{x} \end{math} , \cite{Bishop}. Thus, a component probability \begin{math} P_N(\mathbf{x}^C \end{math}  can be calculated using \begin{math} P_N(\mathbf{x} \end{math}  and is containing broader spatio-temporal relation. Also, the log of the likelihood ratio test \cite{Sheikh} is used as a potential function \begin{math} \psi^k(k) \end{math} . Therefore, the first-order foreground likelihood \begin{math} \tilde{L}_x(x) \end{math} can be calculated as,
+\begin{equation}\label{eq:100}
+  \tilde{L}_x(x) = \frac{1}{C} \sum_{i=1}^C - \textrm{ln} \frac{P_N(x)} {P_A(x)}
 \end{equation}
-\begin{equation}
-  11
+\begin{equation}\label{eq:110}
+  P_A(x) = \frac{1}{| \theta | \cdot |logr| \cdot |i|}
 \end{equation}
-The probability of abnormality   is assumed as a uniform distribution. The C is the number of neighborhood. In experiments, 3×3 patch is used as a component  . 
-\begin{equation}
-  12
+The probability of abnormality \begin{math} P_A(x) \end{math} is assumed as a uniform distribution. The \begin{math} C \end{math} is the number of neighborhood. In experiments, 3 \begin{math} \times \end{math} 3 patch is used as a component \begin{math} x^C \end{math}. 
+%%%
+\begin{equation}\label{eq:120}
+  \tilde{L}(x) = \textrm{min}_{y \in x^C}  (\tilde{L}_y(x))
 \end{equation}
-In addition, positional distribution is considered using (12) for handling small displacement on dynamic background. In experiment, displacement within one pixel was corrected by finding best correspondence in near eight-neighbors. y is the neighborhood of x.   is calculated at y position using the feature values of x.
+%%%
+In addition, positional distribution is considered using  \ref{eq120} for handling small displacement on dynamic background. In experiment, displacement within one pixel was corrected by finding best correspondence in near eight-neighbors. \begin{math} y \end{math} is the neighborhood of \begin{math} x \end{math}. \begin{math} \tilde{L}_y(x) \end{math}  is calculated at \begin{math} y \end{math} position using the feature values of \begin{math} x \end{math}.
 
 
 \subsection{Second-order Spatio-Temporal Background Model}
-In addition, positional distribution is considered using (12) for handling small displacement on dynamic background. In experiment, displacement within one pixel was corrected by finding best correspondence in near eight-neighbors. y is the neighborhood of x.   is calculated at y position using the feature values of x.
-
-\begin{equation}
-  13
+Background variation can be captured by \begin{math} \tilde{L}_y(\hat{x}) \end{math}  distribution and the Expected likelihood descriptor \begin{math} E(L) \end{math} can be built for containing the variation. By assuming temporally and spatially uni-modal, \begin{math} E(L) \end{math} becomes a virtual reference image. It is computed by taking expectation of \begin{math} \tilde{L}_y(\hat{x}) \end{math} with respect to time. 
+\begin{equation}\label{eq:130}
+  E(\tilde{L}_y(\hat{x})) = \frac{1}{N} \sum_{j=1}^N \tilde{L}_y(\hat{x}_j)
 \end{equation}
-where N is the number of  . Figure 7 shows an example of the expected likelihood descriptor. Bright regions indicate highly variant background, whereas dark regions represent static background.
+where \begin{math} N \end{math} is the number of \begin{math} \hat{I}^+ \end{math} . Figure \ref{fig:70} shows an example of the expected likelihood descriptor. Bright regions indicate highly variant background, whereas dark regions represent static background.
 
 \begin{figure}[!t]
   \centering
@@ -207,17 +208,17 @@ where N is the number of  . Figure 7 shows an example of the expected likelihood
   \subfigure[ ]{\includegraphics[width=0.23\textwidth]{paper-fig/fig70-2}}\hfill
   \caption{Expected Likelihood Descriptor}
 \end{figure}
-  can have negative values in static background regions due to the negative log-scaling in (10). As next matching stage requires only positive values for computation, the normalization should be performed as,
-\begin{equation}
-  14
+\begin{math} L(x) \end{math} can have negative values in static background regions due to the negative log-scaling in \ref{eq:10}. As next matching stage requires only positive values for computation, the normalization should be performed as,
+\begin{equation}\label{eq:140}
+  L(x) = 1 - Z \cdot \tilde{L}(x)
 \end{equation}
-\begin{equation}
-  15
+\begin{equation}\label{eq:150}
+  Z = \frac{1}{ \sum_x E( \tilde{L}(\hat{x}) ) } \times W \times H \times 0.5
 \end{equation}
 
-The W and H are width and height of the image, respectively. The normalization constant Z in (15) can be computed by taking sum to one and scaling to uniform distribution with 0.5. After normalizing   using (14), E-L descriptor ensures that  . Also, other   can be normalized using Z. This normalization transforms unnormalized   to be approximately probability values;  . Some values would exceed 1, but they are unimportant to proceed to the next stage.
+The \begin{math} W \end{math} and \begin{math} H \end{math} are width and height of the image, respectively. The normalization constant \begin{math} Z \end{math} in \ref{eq:150} can be computed by taking sum to one and scaling to uniform distribution with 0.5. After normalizing \begin{math} E(\tilde{L}) \end{math} using \ref{eq:140}, E-L descriptor ensures that \begin{math} 0 \le E( L(\hat{x})) \le 1 \end{math}. Also, other \begin{math} \tilde{L}( x_i ) \end{math}  can be normalized using \begin{math} Z \end{math}. This normalization transforms unnormalized \begin{math} \tilde{L}( x_i ) \end{math} to be approximately probability values; \begin{math} 0 \le \tilde{L}( x_i ) \approx 1 \end{math}. Some values would exceed \begin{math} 1 \end{math}, but they are unimportant to proceed to the next stage.
 
-The background variation subtraction can be performed by comparing spatial similarity between   and  . This is equivalent to shape matching process (See 2.3). Thus, the process can be performed by building local descriptors and then comparing those two descriptors using   test (7) .
+The background variation subtraction can be performed by comparing spatial similarity between \begin{math} L(x) \end{math}  and \begin{math} E(\tilde{L}) \end{math}. This is equivalent to shape matching process. Thus, the process can be performed by building local descriptors and then comparing those two descriptors using \begin{math} \chi ^2 \end{math} test \ref{eq:70}.
 
 A local descriptor for each pixel can be built by sampling local distribution of the   into a local histogram. Local smoothness assumption for robustness and centered-focus for distinctiveness can be achieved by building Shape descriptor, [12, 14]. This can be done by center-biased sampling. Figure 8 shows an example. Each box represents a pixel on image patch. The number in each box means an index of the descriptor. The same indexed pixels are taken into a mean for the centered-focus when sampling them into their descriptor. So, 5×5 spatial distribution can be captured in the 9-bin descriptor. 
 
@@ -229,7 +230,7 @@ A local descriptor for each pixel can be built by sampling local distribution of
   \caption{Shape Descriptor}
 \end{figure}
 %The foreground likelihood descriptor   and the expected likelihood descriptor   can be built from  ,   respectively. The similarity of    and   can be obtained using   test (7) and is called the second-order foreground likelihood  . Also, the positional displacement within one pixel neighbors is considered using (12).
-%Figure 9 shows an example of variation subtraction process. (a), (b) represent   and  , respectively. (c), (f) represents  . (d), (g) indicates  . (e), (h) are  . By matching histograms between   and  ,   can be obtained. Note that normal dynamic backgrounds are successfully suppressed close to 0, while keeping foregrounds’ likelihood from being smoothed.
+%Figure 9 shows an example of variation subtraction process. (a), (b) represent   and  , respectively. (c), (f) represents  . (d), (g) indicates  . (e), (h) are  . By matching histograms between   and  ,   can be obtained. Note that normal dynamic backgrounds are successfully suppressed close to 0, while keeping foregrounds' likelihood from being smoothed.
 The foreground likelihood descriptor \begin{math} h_L(x) \end{math} and the expected likelihood descriptor
 \begin{math} h_b(\hat{x}) \end{math} can be built from \begin{math} L(x), E(L(\hat{x})) \end{math} respectively.
 The similarity of \begin{math} h_L(x) \end{math}  and \begin{math} h_b(\hat{x}) \end{math} can be obtained using 
@@ -262,12 +263,12 @@ Note that normal dynamic backgrounds are successfully suppressed close to 0, whi
 \section{Experimental Result}
 The algorithm was tested on Natural scenes with dynamic background for object recognition and SEM images with noise for defect detection. Three background models are compared: the temporal model from Elgammal [6], the first-order spatio-temporal model, and the second-order spatio-temporal model are illustrated at each column, respectively. In the first row, a positive training example  , an inspection image  , and an expected foreground likelihood   are shown, respectively.
 
-For balanced comparison, those three models used LRT test for 3×3 component   (13), and considered positional displacement within one pixel (15), and used Otsu’s thresholding (10). Our method was implemented using Matlab and run on 2.40GHz Intel Pentium Core2 Quad processor with 4 GB RAM.
+For balanced comparison, those three models used LRT test for 3×3 component   (13), and considered positional displacement within one pixel (15), and used Otsu's thresholding (10). Our method was implemented using Matlab and run on 2.40GHz Intel Pentium Core2 Quad processor with 4 GB RAM.
 
 \subsection{Application to Object Recognition of Dynamic scenes}
 These image set contain dynamic background, and there are small transitional, rotational misalignments due to camera jitters. Figure 10–11 show the results. 
 
-Camouflage problem occurs in the temporal model shown in the first column. The foregrounds having similar intensity to their background were missed. The discrimination is enhanced in the first-order spatio-temporal model in the second column, whereas false-alarms increased. After variation subtraction in the third column, the dynamic backgrounds are successfully suppressed. Also, thanks to the stable response of  , the global threshold T chosen from Otsu’s method was working well. Those results show our method is distinctive and robust in dynamic background constraints.
+Camouflage problem occurs in the temporal model shown in the first column. The foregrounds having similar intensity to their background were missed. The discrimination is enhanced in the first-order spatio-temporal model in the second column, whereas false-alarms increased. After variation subtraction in the third column, the dynamic backgrounds are successfully suppressed. Also, thanks to the stable response of  , the global threshold T chosen from Otsu's method was working well. Those results show our method is distinctive and robust in dynamic background constraints.
 
 \begin{figure}[!t]
   \centering
@@ -360,7 +361,7 @@ A decision of defect image is crucial in defect detection. Thus, the classificat
 
 The dynamic background constraints demand distinctiveness and robustness of the background model: camouflage problem and dynamic background problem. Therefore, we extended the background model by assuming S-T MRF for overcoming those problems: the spatio-temporal consistency in the first-order space for distinctiveness and variation consistency in the second-order space for robustness. We showed the distinctiveness and robustness in the applications of the object recognition of dynamic scenes and defect detection in highly noised SEM images.
 The suggested model can be easily applied to video case by updating expected likelihood descriptor   as,
-\begin{equation}
+\begin{equation}\label{eq:160}
   16
 \end{equation}
 
