@@ -1,23 +1,62 @@
 
 ;; M-x slime-cd
 
-(defparameter *cur-dir-str* "d:/data/pr/labproject/2010-2/descriptor_lfb")
+(defparameter *cur-dir-str* "d:/data/pr/labproject/2010-2/descriptor3_lfb")
 
+
+;; 1)
 (defparameter *fname-in-1* "total_desc_libsvm.txt") ; OK
-(defparameter *fold-fnames-1* 
+
+(defparameter *fold-fnames-libsvm-1* 
   '(("x-train-libsvm-1-5.txt" "x-test-libsvm-1-5.txt")
     ("x-train-libsvm-2-5.txt" "x-test-libsvm-2-5.txt")
     ("x-train-libsvm-3-5.txt" "x-test-libsvm-3-5.txt")
     ("x-train-libsvm-4-5.txt" "x-test-libsvm-4-5.txt")
     ("x-train-libsvm-0-5.txt" "x-test-libsvm-0-5.txt")))
 
+(defparameter *fold-fnames-matlab-1* 
+  '(("x-train-matlab-1-5.txt" "x-test-matlab-1-5.txt")
+    ("x-train-matlab-2-5.txt" "x-test-matlab-2-5.txt")
+    ("x-train-matlab-3-5.txt" "x-test-matlab-3-5.txt")
+    ("x-train-matlab-4-5.txt" "x-test-matlab-4-5.txt")
+    ("x-train-matlab-0-5.txt" "x-test-matlab-0-5.txt")))
+
+
+;; 2)
 (defparameter *fname-in-2* "total_desc_libsvm_2.txt") ; OK
-(defparameter *fold-fnames-2* 
+
+(defparameter *fold-fnames-libsvm-2* 
   '(("x-train-libsvm-1-5_2.txt" "x-test-libsvm-1-5_2.txt")
     ("x-train-libsvm-2-5_2.txt" "x-test-libsvm-2-5_2.txt")
     ("x-train-libsvm-3-5_2.txt" "x-test-libsvm-3-5_2.txt")
     ("x-train-libsvm-4-5_2.txt" "x-test-libsvm-4-5_2.txt")
     ("x-train-libsvm-0-5_2.txt" "x-test-libsvm-0-5_2.txt")))
+
+(defparameter *fold-fnames-matlab-2* 
+  '(("x-train-matlab-1-5_2.txt" "x-test-matlab-1-5_2.txt")
+    ("x-train-matlab-2-5_2.txt" "x-test-matlab-2-5_2.txt")
+    ("x-train-matlab-3-5_2.txt" "x-test-matlab-3-5_2.txt")
+    ("x-train-matlab-4-5_2.txt" "x-test-matlab-4-5_2.txt")
+    ("x-train-matlab-0-5_2.txt" "x-test-matlab-0-5_2.txt")))
+
+
+;; 3)
+(defparameter *fname-in-3* "total_desc_libsvm_pas_all.txt") ; OK
+
+(defparameter *fold-fnames-libsvm-3* 
+  '(("x-train-libsvm-pas-all-1-5.txt" "x-test-libsvm-pas-all-1-5.txt")
+    ("x-train-libsvm-pas-all-2-5.txt" "x-test-libsvm-pas-all-2-5.txt")
+    ("x-train-libsvm-pas-all-3-5.txt" "x-test-libsvm-pas-all-3-5.txt")
+    ("x-train-libsvm-pas-all-4-5.txt" "x-test-libsvm-pas-all-4-5.txt")
+    ("x-train-libsvm-pas-all-0-5.txt" "x-test-libsvm-pas-all-0-5.txt")))
+
+(defparameter *fold-fnames-matlab-3* 
+  '(("x-train-matlab-pas-all-1-5.txt" "x-test-matlab-pas-all-1-5.txt")
+    ("x-train-matlab-pas-all-2-5.txt" "x-test-matlab-pas-all-2-5.txt")
+    ("x-train-matlab-pas-all-3-5.txt" "x-test-matlab-pas-all-3-5.txt")
+    ("x-train-matlab-pas-all-4-5.txt" "x-test-matlab-pas-all-4-5.txt")
+    ("x-train-matlab-pas-all-0-5.txt" "x-test-matlab-pas-all-0-5.txt")))
+
 
 (defparameter *str-data-set* nil)
 
@@ -27,34 +66,101 @@
 ;; 				"raw_non-particle2_desc.txt"
 ;; 				"raw_unclassified_desc.txt"))
 
-(progn
-  ;; (init-data-set)
-  ;; (load-data-set *f-in-1*) ;ok - 1
-  ;; (trim-line (load-data-set *f-in-1*)) ;ok - 2
-  ;; (setf *tmp* (split-each-data (trim-lines (load-data-set *f-in-1*)))) ;ok - 3 -for total...
-  ;;(setf *tmp* (split-data-set #\: (split-lines (trim-lines (load-data-set *f-in-1*))))) ;ok - 4 - 전체 변환 완료
-;;  (setf *tmp* (make-data-set-from-file *f-in-1*))
-;;  (setf *tmp* (make-data-set-from-file-2 *f-in-1*))
 
+;;;;;-실행!
+;; (progn
+;;   ;; (init-data-set)
+;;   ;; (load-data-set *f-in-1*) ;ok - 1
+;;   ;; (trim-line (load-data-set *f-in-1*)) ;ok - 2
+;;   ;; (setf *tmp* (split-each-data (trim-lines (load-data-set *f-in-1*)))) ;ok - 3 -for total...
+;;   ;;(setf *tmp* (split-data-set #\: (split-lines (trim-lines (load-data-set *f-in-1*))))) ;ok - 4 - 전체 변환 완료
+;; ;;  (setf *tmp* (make-data-set-from-file *f-in-1*))
+;; ;;  (setf *tmp* (make-data-set-from-file-2 *f-in-1*))
+
+;;   (make-data-1)
+;;   (make-data-2)
+;;   (make-data-3)
+;;   )
+
+;;; LIBSVM -> MATLAB format
+;; (progn
+;;   (setf *tmp* (make-data-set-from-file-3 "./test_desc_libsvm0-5_2.txt"))
+;;   (save-matlab-data-set "./x_test_mlab_0-5_2.txt" *tmp*)
+;; )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun make-data-1 ()
   (setf *data-set* (make-data-set-from-file-3 *fname-in-1*))
   (setf *nfold-data-sets* (make-n-fold-data-sets *data-set* 5))
-;;  (setf *fold-1* (get-fold-tt-set *nfold-data-sets* 1))
-  (save-nfold-data-sets *fold-fnames-1* *nfold-data-sets*) ; n-fold data set
-
+;;  (save-nfold-data-sets *fold-fnames-1* *nfold-data-sets*)
+  (save-nfold-libsvm-data-sets *fold-fnames-libsvm-1* *nfold-data-sets*)
+;;  (save-nfold-matlab-data-sets *fold-fnames-matlab-1* *nfold-data-sets*)
   )
 
+(defun make-data-2 ()
+  (setf *data-set* (make-data-set-from-file-3 *fname-in-2*))
+  (setf *nfold-data-sets* (make-n-fold-data-sets *data-set* 5))
+;;  (save-nfold-data-sets *fold-fnames-2* *nfold-data-sets*)
+  (save-nfold-libsvm-data-sets *fold-fnames-libsvm-2* *nfold-data-sets*)
+;;  (save-nfold-matlab-data-sets *fold-fnames-matlab-2* *nfold-data-sets*)
+)
 
+(defun make-data-3 ()
+  (setf *data-set* (make-data-set-from-file-3 *fname-in-3*))
+  (setf *nfold-data-sets* (make-n-fold-data-sets *data-set* 5))
+;;  (save-nfold-data-sets *fold-fnames-3* *nfold-data-sets*)
+  (save-nfold-libsvm-data-sets *fold-fnames-libsvm-3* *nfold-data-sets*)
+;;  (save-nfold-matlab-data-sets *fold-fnames-matlab-3* *nfold-data-sets*)
+)
+
+
+
+;;;-----------------------------------------------------------
+;;;----
 (defun save-nfold-data-sets (fold-fnames nfold-data-sets)
-  (maplist #'(lambda (fname-cdr fold-tt-set-cdr)
-	       (save-data-set (car fname-cdr) (car fold-tt-set-cdr)))
+  ;; train
+  (mapcar #'(lambda (fname fold-tt-set)
+	       (save-data-set fname fold-tt-set))
 	   (get-train-fnames fold-fnames)
 	   (get-train-nfsets nfold-data-sets))
-  (maplist #'(lambda (fname-cdr fold-tt-set-cdr)
-	       (save-data-set (car fname-cdr) (car fold-tt-set-cdr)))
+  ;; test
+  (mapcar #'(lambda (fname fold-tt-set)
+	       (save-data-set fname fold-tt-set))
 	   (get-test-fnames fold-fnames)
 	   (get-test-nfsets nfold-data-sets)))
 ;; (maplist #'(lambda (x y) (list (car x) (car y))) '(1 2 3) '(1 2 3))
+
+(defun save-nfold-libsvm-data-sets (fold-fnames nfold-data-sets)
+  ;; train
+  (mapcar #'(lambda (fname fold-tt-set)
+	       (save-data-set fname fold-tt-set))
+	   (get-train-fnames fold-fnames)
+	   (get-train-nfsets nfold-data-sets))
+  ;; test
+  (maplist #'(lambda (fname-cdr fold-tt-set-cdr)
+	       (save-libsvm-data-set (car fname-cdr) (car fold-tt-set-cdr)))
+	   (get-test-fnames fold-fnames)
+	   (get-test-nfsets nfold-data-sets)))
+;; (maplist #'(lambda (x y) (list (car x) (car y))) '(1 2 3) '(1 2 3))
+
   
+(defun save-nfold-matlab-data-sets (fold-fnames nfold-data-sets)
+  ;; train
+  (maplist #'(lambda (fname-cdr fold-tt-set-cdr)
+	       (save-matlab-data-set (car fname-cdr) (car fold-tt-set-cdr)))
+	   (get-train-fnames fold-fnames)
+	   (get-train-nfsets nfold-data-sets))
+  ;; test
+  (maplist #'(lambda (fname-cdr fold-tt-set-cdr)
+	       (save-matlab-data-set (car fname-cdr) (car fold-tt-set-cdr)))
+	   (get-test-fnames fold-fnames)
+	   (get-test-nfsets nfold-data-sets)))
+;; (maplist #'(lambda (x y) (list (car x) (car y))) '(1 2 3) '(1 2 3))
+
+
+
+;;;----
+;;;-----------------------------------------------------------
 
 (defun get-train-fnames (fold-fnames)
   (mapcar #'car fold-fnames))
@@ -75,6 +181,22 @@
 	  nfold-data-sets))
 
 
+;;;-----------------------------------------------------------
+;;;----
+;; (defun save-data-set-fn (fname data-set iv-write-fn)
+;;   "data set을 파일에 저장"
+;;   (with-open-file (out fname
+;; 		       :direction :output
+;; 		       :if-exists :supersede)
+;;     (mapcar #'(lambda (data)
+;; 		(progn
+;; 		  (format out "~A " (class-data data))
+;; 		  (mapcar #'(lambda (iv) 
+;; 			      (iv-write-fn out iv))
+;; 			  (feature-vec-data data))
+;; 		  (format out "~%")))
+;; 	    data-set)))
+  
 (defun save-data-set (fname data-set)
   "data set을 파일에 저장"
   (with-open-file (out fname
@@ -89,6 +211,38 @@
 		  (format out "~%")))
 	    data-set)))
 ;; (save-data-set "xxx-train-2.txt" (get-train-set *fold-1*))
+
+(defun save-libsvm-data-set (fname data-set)
+  "data set을 파일에 저장"
+  (with-open-file (out fname
+		       :direction :output
+		       :if-exists :supersede)
+    (mapcar #'(lambda (data)
+		(progn
+		  (format out "~A " (class-data data))
+		  (mapcar #'(lambda (iv) 
+			      (format out "~A:~A " (ind-iv iv) (fval-iv iv)))
+			  (feature-vec-data data))
+		  (format out "~%")))
+	    data-set)))
+;; (save-data-set "xxx-train-2.txt" (get-train-set *fold-1*))
+
+(defun save-matlab-data-set (fname data-set)
+  "data set을 파일에 저장"
+  (with-open-file (out fname
+		       :direction :output
+		       :if-exists :supersede)
+    (mapcar #'(lambda (data)
+		(progn
+		  (format out "~A " (class-data data))
+		  (mapcar #'(lambda (iv) 
+			      (format out "~A " (fval-iv iv)))
+			  (feature-vec-data data))
+		  (format out "~%")))
+	    data-set)))
+;; (save-data-set "xxx-train-2.txt" (get-train-set *fold-1*))
+;;;----
+;;;-----------------------------------------------------------
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -196,7 +350,8 @@ feature인덱스 - feature값)-리스트 형태로 구분"
   (mapcar #'(lambda (x) 
 	      (split-a-if-into-iv ch x)) 
 	  data))
-;;(split-data #\: '("1:23" "2:34"))
+;;(split-if-vec-into-ivs #\: '("1:23" "2:34" "3:45"))
+;;(split-if-vec-into-ivs #\: '("1:23" "2:34" "345"))
 
 (defun split-a-if-into-iv (ch datum)
   "datum문자열에서 ch문자기준으로 두개로 나눈다.
@@ -222,7 +377,7 @@ feature인덱스 - feature값)-리스트 형태로 구분"
 (defun trim-lines (str-data-set)
   "데이터의 각 줄마다 양끝의 스페이스 제거"
   (mapcar #'(lambda (x) 
-	      (string-trim " " x)) str-data-set))
+	      (string-trim '(#\Space #\Return) x)) str-data-set))
 
 (defun split-lines (str-data-set)
   "스페이스를 구분자로 해서 리스트로 설정"
@@ -234,7 +389,7 @@ feature인덱스 - feature값)-리스트 형태로 구분"
   (setf *str-data-set* nil))
 
 (defun load-data-set (fname)
-  "파일을 읽어서 한 줄씩 리스트 원소로 할당하여 *raw-data*에 설정"
+  "파일을 읽어서 한 줄씩 리스트 원소로 할당하여 *str-data-set*에 설정"
   (with-open-file (in fname
 		      :direction :input)
     (loop for line = (read-line in nil)
@@ -245,19 +400,19 @@ feature인덱스 - feature값)-리스트 형태로 구분"
 
 
 (defun load-data-set-2 (fname)
-  "파일을 읽어서 한 줄씩 리스트 원소로 할당하여 *raw-data*에 설정
+  "파일을 읽어서 한 줄씩 리스트 원소로 할당하여 *str-data-set*에 설정
 2:trim-line"
   (with-open-file (in fname
 		      :direction :input)
     (loop for line = (read-line in nil)
        while line
-       do (let ((trimed-line (string-trim " " line)))
+       do (let ((trimed-line (string-trim '(#\Space #\Return) line)))
 	    (setf *str-data-set* (cons trimed-line *str-data-set*))))
     (close in))
   (setf *str-data-set* (reverse *str-data-set*)))
 
 (defun load-data-set-3 (fname)
-  "파일을 읽어서 한 줄씩 리스트 원소로 할당하여 *raw-data*에 설정
+  "파일을 읽어서 한 줄씩 리스트 원소로 만들어서 리턴
 2:trim-line
 3:split-iv"
   (let ((data-set nil))
@@ -265,7 +420,7 @@ feature인덱스 - feature값)-리스트 형태로 구분"
 			:direction :input)
       (loop for line = (read-line in nil)
 	 while line
-	 do (let* ((trimed-line (string-trim " " line))
+	 do (let* ((trimed-line (string-trim '(#\Space #\Return) line))
 		   (splited-line (split-by-one-space trimed-line)))
 	      (let ((class-val (car splited-line))
 		    (if-vec (cdr splited-line)))
