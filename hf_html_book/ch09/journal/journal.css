@@ -1,0 +1,35 @@
+body {
+    font-family: Verdana, Geneva, Arial, sans-serif;
+
+    font-size: 14px;
+    font-size: small;
+
+/*
+    background-color: silver;
+    background-color: rgb(80%, 40%, 0%);
+    background-color: rgb(204, 102, 0);
+    background-color: #cc6600;
+*/
+
+}
+
+h1, h2 {
+    font-weight: normal;
+    color: #cc6600;
+/*
+    text-decoration: underline;
+*/
+    border-bottom: thin dotted #888888;
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 { 
+    font-size: 1.2em;
+}
+
+blockquote {
+    font-style: italic;
+}
