@@ -1,0 +1,37 @@
+≈Ω(defproject test "1.0.0"
+  :descript "A clojure project test"
+  :dependencies [
+		 [org.clojure/clojure "1.4.0"]
+;		 [org.clojure/clojure-contrib "1.2.0"]
+		 [org.clojure/clojure-contrib "1.2.0"]
+		 [org.clojure/java.jdbc "0.1.1"]
+		 [ring "1.1.0"]
+		 ]
+  :plugins [
+	    [lein-swank "1.4.4"]
+;	    [swank-clojure "1.1.0"]
+	    ]
+;  :plugins [[swank-clojure "1.1.0"]]
+  )
+
+;; (defproject ring "1.1.0"
+;;   :description "A Clojure web applications library."
+;;   :url "http://github.com/mmcgrana/ring"
+;;   :dependencies
+;;     [[ring/ring-core "1.1.0"]
+;;      [ring/ring-devel "1.1.0"]
+;;      [ring/ring-jetty-adapter "1.1.0"]
+;;      [ring/ring-servlet "1.1.0"]]
+;;   :plugins
+;;     [[lein-sub "0.2.0"]
+;;      [codox "0.6.1"]]
+;;   :sub
+;;     ["ring-core"
+;;      "ring-devel"
+;;      "ring-jetty-adapter"
+;;      "ring-servlet"]
+;;   :codox
+;;     {:sources ["ring-core/src"
+;;                "ring-devel/src"
+;;                "ring-jetty-adapter/src"
+;;                "ring-servlet/src"]})
