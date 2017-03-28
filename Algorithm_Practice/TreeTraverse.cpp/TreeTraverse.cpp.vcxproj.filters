@@ -18,4 +18,9 @@
     <Text Include="input.txt" />
     <Text Include="temp.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main_tree_traverse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
