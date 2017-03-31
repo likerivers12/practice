@@ -29,21 +29,38 @@ typedef struct {
 
 
 int get_token(Token *tok, char str[], int &s_pos);
-int get_var_value(char str[]);
-int get_num_value(char str[]);
-
-
-
-
-
+int get_num_value(char * str);
 
 
 #define MAX_STACK_SIZE 100
-Element stack[MAX_STACK_SIZE];
-int top = -1;
+Token stack[MAX_STACK_SIZE];
+int top;
+
+void init_stack()
+{
+	top = -1;
+}
+
+void push(Token const & tok)
+{
+	top++;
+	stack[top].tok_id = tok.tok_id;
+	// for 
+	//stack[i].tok_str = tok.tok_str[i];
+	stack[top].tok_value = tok.tok_value;
+}
+
+Token pop(void)
+{
+	int tmp = top;
+	top--;
+	return stack[tmp];
+}
 
 
-
+//#define MAX_STACK_SIZE 100
+//Element stack[MAX_STACK_SIZE];
+//int top = -1;
 
 
 int get_var_token(Token *tok, char str[], int &s_pos)
@@ -144,10 +161,30 @@ int get_token(Token *tok, char str[], int &s_pos)
 	return 0;
 }
 
+int get_num_value(char *str)
+{
+	int val = 0;
+	int num;
+	int digit = 10;
+
+	for (int i = 0; str[i] != NULL; i++) {
+		num = str[i] - '0';
+		val = digit*val + num;
+	}
+
+	return val;
+}
+
 int solve(char in_str[], int in_var[])
 {
+	init_stack();
+
 	Token tok;
+	Token tok2;
+	Token tok1;
+
 	int s_pos = 0;
+	int num;
 
 	while (get_token(&tok, in_str, s_pos) >= 0) {
 
@@ -155,7 +192,89 @@ int solve(char in_str[], int in_var[])
 		if (tok.tok_id == TID_VAR)
 			cout << "D";
 		cout << tok.tok_str << endl;
+
+
+
+		if (tok.tok_id == TID_VAR) {
+			int var_idx = get_num_value(tok.tok_str);
+			tok.tok_value = in_var[var_idx];
+
+			cout << var_idx << endl;
+			cout << "value: (" << in_var[var_idx] << ")" << endl;
+			
+			// 스택에 넣는다.
+			tok.tok_id = TID_NUM;
+			push(tok);
+		}
+		else if (tok.tok_id == TID_NUM) {
+			num = get_num_value(tok.tok_str);
+			tok.tok_value = num;
+
+			cout << "value: (" << num << ")" << endl;
+			// 스택에 넣는다.
+			push(tok);
+		}
+		else if (tok.tok_id == TID_OP_ADD || tok.tok_id == TID_OP_SUB) {
+			// POP, PUSH NEW, PUSH BACK
+			tok1 = pop();
+			push(tok);
+			push(tok1);
+
+		}
+		else if (tok.tok_id == TID_OP_MUL) {
+			tok2;
+			get_token(&tok2, in_str, s_pos);
+
+			if (tok2.tok_id == TID_NUM) {
+				int num = get_num_value(tok2.tok_str);
+				tok2.tok_value = num;
+			}
+			else if (tok2.tok_id == TID_VAR) {
+				int var_idx = get_num_value(tok2.tok_str);
+				tok2.tok_value = in_var[var_idx];
+
+				cout << var_idx << endl;
+				cout << "value: (" << in_var[var_idx] << ")" << endl;
+			}
+			else {
+				// error!
+				cout << "Error! Not a Number!" << endl;
+			}
+
+			// POP tok2
+			tok1 = pop();
+			int num1 = tok1.tok_value;
+			int num2 = tok2.tok_value;
+
+			tok1.tok_value = num1 * num2;
+			cout << "Mult: (" << tok1.tok_value << ") = (" << num1 << "*" << num2 << ")" << endl;
+			push(tok1);
+
+		}
+
 		cout << "-------------" << endl;
 	}
-	return 0;
+
+
+	Token tok_op;
+	while (top > 2) {
+		// POP, PUSH NEW, PUSH BACK
+		tok2 = pop();
+		tok1 = pop();
+		tok_op = pop();
+
+		if (tok_op.tok_id == TID_OP_ADD) {
+			tok1.tok_value = tok1.tok_value + tok2.tok_value;
+			push(tok1);
+		}
+		else if (tok_op.tok_id == TID_OP_SUB) {
+			tok1.tok_value = tok1.tok_value - tok2.tok_value;
+			push(tok1);
+		}
+		else {
+			cout << "ERROR! NOT ADD nor SUB" << endl;
+		}
+	}
+
+	return stack[top].tok_value;
 }
