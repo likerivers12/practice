@@ -1,7 +1,7 @@
 #ifndef MAZE_MOVING_H
 #define MAZE_MOVING_H
 
-#define DEBUG_LEVEL 2
+#define DEBUG_LEVEL 0
 #define N_TEST_CASE 3
 
 #define MAX_Q_SIZE (102*102)

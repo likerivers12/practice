@@ -255,26 +255,52 @@ int solve(char in_str[], int in_var[])
 		cout << "-------------" << endl;
 	}
 
-
+	// 후위식으로 스택에 넣고 ex) 1+2 -> BTM| 1 2 + | TOP
+	// index 0부터 처리
 	Token tok_op;
-	while (top > 2) {
-		// POP, PUSH NEW, PUSH BACK
-		tok2 = pop();
-		tok1 = pop();
-		tok_op = pop();
-
+	int res_val = 0;
+	int i = 0;
+	tok_op = stack[i++];
+	tok1 = stack[i++];
+	tok2 = stack[i++];
+	if (tok_op.tok_id == TID_OP_ADD) {
+		res_val = tok1.tok_value + tok2.tok_value;
+	}
+	else if (tok_op.tok_id == TID_OP_SUB) {
+		res_val = tok1.tok_value - tok2.tok_value;
+	}
+	else {
+		cout << "ERROR! NOT ADD nor SUB" << endl;
+	}
+	while (i <= top) {
 		if (tok_op.tok_id == TID_OP_ADD) {
-			tok1.tok_value = tok1.tok_value + tok2.tok_value;
-			push(tok1);
+			res_val = tok1.tok_value + tok2.tok_value;
 		}
 		else if (tok_op.tok_id == TID_OP_SUB) {
-			tok1.tok_value = tok1.tok_value - tok2.tok_value;
-			push(tok1);
+			res_val = tok1.tok_value - tok2.tok_value;
 		}
 		else {
 			cout << "ERROR! NOT ADD nor SUB" << endl;
 		}
 	}
+	//while (top > 2) {
+	//	// POP, PUSH NEW, PUSH BACK
+	//	tok2 = pop();
+	//	tok1 = pop();
+	//	tok_op = pop();
+
+	//	if (tok_op.tok_id == TID_OP_ADD) {
+	//		tok1.tok_value = tok1.tok_value + tok2.tok_value;
+	//		push(tok1);
+	//	}
+	//	else if (tok_op.tok_id == TID_OP_SUB) {
+	//		tok1.tok_value = tok1.tok_value - tok2.tok_value;
+	//		push(tok1);
+	//	}
+	//	else {
+	//		cout << "ERROR! NOT ADD nor SUB" << endl;
+	//	}
+	//}
 
 	return stack[top].tok_value;
 }

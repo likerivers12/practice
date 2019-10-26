@@ -7,7 +7,7 @@ using namespace std;
 
 
 #define MAX_MAP_SIZE 100
-#define MAX_Q_SIZE (MAX_MAP_SIZE*MAX_MAP_SIZE)
+#define MAX_Q_SIZE (MAX_MAP_SIZE*MAX_MAP_SIZE*MAX_MAP_SIZE)
 
 
 #define M_EMPTY 0
@@ -35,7 +35,7 @@ typedef struct PositionInfo {
 	Position blue;
 	Position red;
 	int n_move;		// 현재까지 이동 수
-	int i_dir;		// 다음 갈 방향
+	//int i_dir;		// 다음 갈 방향
 };
 
 int N, M;
@@ -110,7 +110,7 @@ void take_move(Position * pos, int i_dir)
 
 	pos->r = next_r;
 	pos->c = next_c;
-};\
+};
 
 
 bool is_valid(Position const & red, Position const & blue)
@@ -171,15 +171,17 @@ int solve()
 			blue = elm.blue;
 			n_move = elm.n_move;
 
+#ifdef DEBUG
 			printf("----------------------------------\n");
 			print_map();
-
+#endif
 			if (is_movable(red, blue, i)) {
 				take_move(&red, i);
 				take_move(&blue, i);
 				n_move++;
-
+#ifdef DEBUG
 				print_map();
+#endif
 				if (is_valid(red, blue)) {
 					next_elm.red = red;
 					next_elm.blue = blue;
@@ -194,7 +196,9 @@ int solve()
 			}
 
 		} // end fo
+#ifdef DEBUG
 		printf("----------------------------------\n");
+#endif
 	} // end while
 
 }
@@ -219,10 +223,12 @@ int main(void)
 				if (val == M_RED) {
 					red.r = r;
 					red.c = c;
+					map[r][c] = M_EMPTY;
 				}
 				else if (val == M_BLUE) {
 					blue.r = r;
 					blue.c = c;
+					map[r][c] = M_EMPTY;
 				}
 				else {
 					map[r][c] = val;
